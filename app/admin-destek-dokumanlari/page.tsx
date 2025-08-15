@@ -389,7 +389,7 @@ export default function AdminDestekDokumanlariPage() {
       localStorage.removeItem('adminEmail');
       router.push('/admin-login');
     } catch (e) {
-      console.error('[AdminDestekDokumanlari]', e?.message, e);
+      console.error('[AdminDestekDokumanlari]', e instanceof Error ? e.message : 'Bilinmeyen hata', e);
     }
   };
 
