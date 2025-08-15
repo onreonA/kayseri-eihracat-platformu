@@ -2733,6 +2733,7 @@ export class SupabaseEgitimService {
     setAdi: string;
     aciklama: string;
     kategori: string;
+    durum?: string;
   }) {
     try {
       const { data: newSet, error } = await supabase
@@ -2741,6 +2742,7 @@ export class SupabaseEgitimService {
           set_adi: data.setAdi,
           aciklama: data.aciklama,
           kategori: data.kategori,
+          durum: data.durum || 'Aktif',
           created_at: new Date().toISOString()
         }])
         .select()
@@ -2773,12 +2775,14 @@ export class SupabaseEgitimService {
     setAdi?: string;
     aciklama?: string;
     kategori?: string;
+    durum?: string;
   }) {
     try {
       const updateData: any = {};
       if (data.setAdi) updateData.set_adi = data.setAdi;
       if (data.aciklama) updateData.aciklama = data.aciklama;
       if (data.kategori) updateData.kategori = data.kategori;
+      if (data.durum) updateData.durum = data.durum;
 
       const { data: updatedSet, error } = await supabase
         .from('egitim_setleri')
