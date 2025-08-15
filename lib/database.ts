@@ -184,7 +184,7 @@ export class DataCleanupService {
 
       let supabaseConnected = false;
       let tablesAccessible = false;
-      let dataCount = { firmalar: 0, projeler: 0, gorevler: 0 };
+      const dataCount = { firmalar: 0, projeler: 0, gorevler: 0 };
 
       if (supabase) {
         try {
