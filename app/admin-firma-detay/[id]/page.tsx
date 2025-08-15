@@ -21,7 +21,12 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function AdminFirmaDetayPage({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function AdminFirmaDetayPage({ params }: PageProps) {
+  const { id } = await params;
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -31,7 +36,7 @@ export default function AdminFirmaDetayPage({ params }: { params: { id: string }
         </div>
       </div>
     }>
-      <AdminFirmaDetayClient firmaId={params.id} />
+      <AdminFirmaDetayClient firmaId={id} />
     </Suspense>
   );
 }

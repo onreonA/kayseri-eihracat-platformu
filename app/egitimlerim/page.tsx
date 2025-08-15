@@ -3,7 +3,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { ModernLayout } from '../../components/Layout/ModernLayout';
+import ModernLayout from '../../components/Layout/ModernLayout';
 import { UnifiedAuthService } from '../../lib/unified-auth';
 import Link from 'next/link';
 import React from 'react';
