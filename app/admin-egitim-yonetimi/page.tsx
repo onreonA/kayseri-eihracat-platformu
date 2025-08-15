@@ -534,7 +534,7 @@ export default function AdminEgitimYonetimiPage() {
       if (confirm('Bu videoyu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) {
         console.log(`Video ${video.id} silme işlemi başlatılıyor...`);
 
-        const silindi = await SupabaseEgitimService.deleteEgitimVideosu(video.id);
+        const silindi = await SupabaseEgitimService.deleteEgitimVideo(video.id);
 
         if (silindi) {
           const setId = video.egitim_set_id;
