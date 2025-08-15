@@ -139,7 +139,7 @@ export default function AdminDashboardPage() {
           await loadSupabaseDashboardData();
         }
       } catch (e) {
-        console.error('[AdminDashboard]', e?.message, e);
+        console.error('[AdminDashboard]', e instanceof Error ? e.message : 'Bilinmeyen hata', e);
         if (isMountedRef.current) {
           setLoading(false);
         }
@@ -324,7 +324,7 @@ export default function AdminDashboardPage() {
         setLoading(false);
       }
     } catch (e) {
-      console.error('[AdminDashboard]', e?.message, e);
+      console.error('[AdminDashboard]', e instanceof Error ? e.message : 'Bilinmeyen hata', e);
       if (isMountedRef.current) {
         setLoading(false);
       }
@@ -349,7 +349,7 @@ export default function AdminDashboardPage() {
     try {
       router.push('/');
     } catch (e) {
-      console.error('[AdminDashboard]', e?.message, e);
+      console.error('[AdminDashboard]', e instanceof Error ? e.message : 'Bilinmeyen hata', e);
     }
   };
 
