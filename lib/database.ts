@@ -2727,3 +2727,86 @@ export class DestekDokümanlarıService {
     }
   }
 }
+
+export class SupabaseEgitimService {
+  static async createEgitimSeti(data: {
+    setAdi: string;
+    aciklama: string;
+    kategori: string;
+  }) {
+    try {
+      const { data: newSet, error } = await supabase
+        .from('egitim_setleri')
+        .insert([{
+          set_adi: data.setAdi,
+          aciklama: data.aciklama,
+          kategori: data.kategori,
+          created_at: new Date().toISOString()
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+      return newSet;
+    } catch (error) {
+      console.error('Eğitim seti oluşturulurken hata:', error);
+      throw error;
+    }
+  }
+
+  static async getAllEgitimSetleri() {
+    try {
+      const { data, error } = await supabase
+        .from('egitim_setleri')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      return data || [];
+    } catch (error) {
+      console.error('Eğitim setleri yüklenirken hata:', error);
+      return [];
+    }
+  }
+
+  static async updateEgitimSeti(id: number, data: {
+    setAdi?: string;
+    aciklama?: string;
+    kategori?: string;
+  }) {
+    try {
+      const updateData: any = {};
+      if (data.setAdi) updateData.set_adi = data.setAdi;
+      if (data.aciklama) updateData.aciklama = data.aciklama;
+      if (data.kategori) updateData.kategori = data.kategori;
+
+      const { data: updatedSet, error } = await supabase
+        .from('egitim_setleri')
+        .update(updateData)
+        .eq('id', id)
+        .select()
+        .single();
+
+      if (error) throw error;
+      return updatedSet;
+    } catch (error) {
+      console.error('Eğitim seti güncellenirken hata:', error);
+      throw error;
+    }
+  }
+
+  static async deleteEgitimSeti(id: number) {
+    try {
+      const { error } = await supabase
+        .from('egitim_setleri')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+      return true;
+    } catch (error) {
+      console.error('Eğitim seti silinirken hata:', error);
+      throw error;
+    }
+  }
+}
