@@ -400,7 +400,7 @@ export default function AdminFirmaDetayClient({ firmaId }: AdminFirmaDetayClient
     ortalamaIlerleme: 0,
     tamamlananHizmet: 0,
     toplamHizmet: 0,
-    detaylar: []
+    detaylar: [] as { hizmetAdi: string; ilerleme: number; durum: string; }[]
   });
 
   const router = useRouter();
