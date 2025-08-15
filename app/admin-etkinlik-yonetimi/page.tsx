@@ -131,7 +131,7 @@ export default function AdminEtkinlikYonetimiPage() {
     ucretsizMi: true,
     ucretMiktari: 0,
     durum: 'Aktif',
-    katilimciFirmalar: [],
+    katilimciFirmalar: [] as number[],
   });
 
   const router = useRouter();
@@ -232,7 +232,7 @@ export default function AdminEtkinlikYonetimiPage() {
       ucretsizMi: true,
       ucretMiktari: 0,
       durum: 'Aktif',
-      katilimciFirmalar: [],
+      katilimciFirmalar: [] as number[],
     });
     setEditingEtkinlik(null);
   };
