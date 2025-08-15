@@ -2901,4 +2901,34 @@ export class SupabaseEgitimService {
       throw error;
     }
   }
+
+  static async ataEgitimSetiFirmaya(setId: number, firmaIds: number[]) {
+    try {
+      // Önce mevcut atamaları temizle
+      await supabase
+        .from('egitim_set_atamalari')
+        .delete()
+        .eq('egitim_set_id', setId);
+
+      // Yeni atamaları ekle
+      if (firmaIds.length > 0) {
+        const atamalar = firmaIds.map(firmaId => ({
+          egitim_set_id: setId,
+          firma_id: firmaId,
+          created_at: new Date().toISOString()
+        }));
+
+        const { error } = await supabase
+          .from('egitim_set_atamalari')
+          .insert(atamalar);
+
+        if (error) throw error;
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Eğitim seti firma ataması yapılırken hata:', error);
+      throw error;
+    }
+  }
 }
