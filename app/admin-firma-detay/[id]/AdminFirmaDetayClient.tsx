@@ -602,7 +602,12 @@ export default function AdminFirmaDetayClient({ firmaId }: AdminFirmaDetayClient
         setFirmaHizmetleri(prev =>
           prev.map(hizmet =>
             hizmet.id === serviceId
-              ? { ...hizmet, ...editServiceData }
+              ? { 
+                  ...hizmet, 
+                  ...(editServiceData.durum !== undefined && { durum: editServiceData.durum }),
+                  ilerlemeYuzdesi: editServiceData.ilerlemeYuzdesi,
+                  danismanNotlari: editServiceData.danismanNotlari
+                }
               : hizmet
           )
         );
