@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getSupabaseClient } from '@/lib/supabaseClient';
-import { SupabaseEgitimService, SupabaseFirmaService } from '../../lib/supabase-services';
+import { SupabaseEgitimService } from '../../lib/database';
+import { SupabaseFirmaService } from '../../lib/supabase-services';
 
 interface EgitimSeti {
   id: number;
