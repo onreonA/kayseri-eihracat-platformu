@@ -131,11 +131,11 @@ class SupabaseFirmaDetayLoader {
       console.log(`✅ Supabase\'den ${allFirmalar.length} firma yüklendi`);
 
       // Hedef firmayı bul
-      const firma = allFirmalar.find(f => f.id === targetId);
+      const firma = allFirmalar.find((f: any) => f.id === targetId);
 
       if (!firma) {
         console.error(`❌ ID ${targetId} ile firma bulunamadı`);
-        console.log('📋 Mevcut firma ID\'leri:', allFirmalar.map(f => f.id));
+        console.log('📋 Mevcut firma ID\'leri:', allFirmalar.map((f: any) => f.id));
         return null;
       }
 
