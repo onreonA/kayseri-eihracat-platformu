@@ -20,6 +20,11 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function AltProjeDetayPage({ params }: { params: { alt_proje_id: string } }) {
-  return <AltProjeDetayClient altProjeId={params.alt_proje_id} />;
+interface PageProps {
+  params: Promise<{ alt_proje_id: string }>;
+}
+
+export default async function AltProjeDetayPage({ params }: PageProps) {
+  const { alt_proje_id } = await params;
+  return <AltProjeDetayClient altProjeId={alt_proje_id} />;
 }

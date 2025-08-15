@@ -19,10 +19,15 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function AltProjeDuzenlePage({ params }: { params: { projeId: string; altProjeId: string } }) {
+interface PageProps {
+  params: Promise<{ projeId: string; altProjeId: string }>;
+}
+
+export default async function AltProjeDuzenlePage({ params }: PageProps) {
+  const { projeId, altProjeId } = await params;
   console.log('🚀 Alt proje düzenleme sayfası yükleniyor:', {
-    projeId: params.projeId,
-    altProjeId: params.altProjeId
+    projeId,
+    altProjeId
   });
   
   return (
@@ -32,14 +37,14 @@ export default function AltProjeDuzenlePage({ params }: { params: { projeId: str
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Alt proje düzenleme formu yükleniyor...</p>
           <p className="text-sm text-gray-500 mt-2">
-            Proje: {params.projeId}, Alt Proje: {params.altProjeId}
+            Proje: {projeId}, Alt Proje: {altProjeId}
           </p>
         </div>
       </div>
     }>
-      <AltProjeDuzenleClient 
-        projeId={params.projeId} 
-        altProjeId={params.altProjeId} 
+            <AltProjeDuzenleClient 
+        projeId={projeId} 
+        altProjeId={altProjeId}
       />
     </Suspense>
   );

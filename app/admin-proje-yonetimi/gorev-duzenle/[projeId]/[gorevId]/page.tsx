@@ -20,7 +20,12 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function GorevDuzenlePage({ params }: { params: { projeId: string; gorevId: string } }) {
+interface PageProps {
+  params: Promise<{ projeId: string; gorevId: string }>;
+}
+
+export default async function GorevDuzenlePage({ params }: PageProps) {
+  const { projeId, gorevId } = await params;
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -30,7 +35,7 @@ export default function GorevDuzenlePage({ params }: { params: { projeId: string
         </div>
       </div>
     }>
-      <GorevDuzenleClient projeId={params.projeId} gorevId={params.gorevId} />
+      <GorevDuzenleClient projeId={projeId} gorevId={gorevId} />
     </Suspense>
   );
 }

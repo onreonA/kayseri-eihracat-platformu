@@ -14,8 +14,13 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function AltProjeEklePage({ params }: { params: { projeId: string } }) {
-  console.log('🚀 Alt proje ekle sayfası yükleniyor, Proje ID:', params.projeId);
+interface PageProps {
+  params: Promise<{ projeId: string }>;
+}
+
+export default async function AltProjeEklePage({ params }: PageProps) {
+  const { projeId } = await params;
+  console.log('🚀 Alt proje ekle sayfası yükleniyor, Proje ID:', projeId);
   
   return (
     <Suspense fallback={
@@ -26,7 +31,7 @@ export default function AltProjeEklePage({ params }: { params: { projeId: string
         </div>
       </div>
     }>
-      <AltProjeEkleClient projeId={params.projeId} />
+      <AltProjeEkleClient projeId={projeId} />
     </Suspense>
   );
 }

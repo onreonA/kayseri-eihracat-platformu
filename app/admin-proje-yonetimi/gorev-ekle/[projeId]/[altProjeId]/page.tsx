@@ -19,7 +19,12 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function AltProjeGorevEklePage({ params }: { params: { projeId: string; altProjeId: string } }) {
+interface PageProps {
+  params: Promise<{ projeId: string; altProjeId: string }>;
+}
+
+export default async function AltProjeGorevEklePage({ params }: PageProps) {
+  const { projeId, altProjeId } = await params;
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -29,7 +34,7 @@ export default function AltProjeGorevEklePage({ params }: { params: { projeId: s
         </div>
       </div>
     }>
-      <AltProjeGorevEkleClient projeId={params.projeId} altProjeId={params.altProjeId} />
+      <AltProjeGorevEkleClient projeId={projeId} altProjeId={altProjeId} />
     </Suspense>
   );
 }

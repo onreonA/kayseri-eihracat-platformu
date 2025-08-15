@@ -15,7 +15,12 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function GorevEklePage({ params }: { params: { projeId: string } }) {
+interface PageProps {
+  params: Promise<{ projeId: string }>;
+}
+
+export default async function GorevEklePage({ params }: PageProps) {
+  const { projeId } = await params;
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -25,7 +30,7 @@ export default function GorevEklePage({ params }: { params: { projeId: string } 
         </div>
       </div>
     }>
-      <GorevEkleClient projeId={params.projeId} />
+      <GorevEkleClient projeId={projeId} />
     </Suspense>
   );
 }
