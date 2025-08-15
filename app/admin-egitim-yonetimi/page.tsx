@@ -29,7 +29,7 @@ interface EgitimVideosu {
   video_suresi: number;
   sira_no: number;
   aciklama: string;
-  pdf_url?: string;
+  pdf_url?: string | null;
   durum: string;
   created_at: string;
 }
