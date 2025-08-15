@@ -15,7 +15,12 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function AdminProjeDuzenlePage({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function AdminProjeDuzenlePage({ params }: PageProps) {
+  const { id } = await params;
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -25,7 +30,7 @@ export default function AdminProjeDuzenlePage({ params }: { params: { id: string
         </div>
       </div>
     }>
-      <ProjeDuzenleClient projeId={params.id} />
+      <ProjeDuzenleClient projeId={id} />
     </Suspense>
   );
 }

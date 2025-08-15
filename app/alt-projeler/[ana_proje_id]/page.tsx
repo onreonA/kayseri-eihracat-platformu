@@ -20,6 +20,11 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function AltProjelerPage({ params }: { params: { ana_proje_id: string } }) {
-  return <AltProjelerClient anaProjeId={params.ana_proje_id} />;
+interface PageProps {
+  params: Promise<{ ana_proje_id: string }>;
+}
+
+export default async function AltProjelerPage({ params }: PageProps) {
+  const { ana_proje_id } = await params;
+  return <AltProjelerClient anaProjeId={ana_proje_id} />;
 }

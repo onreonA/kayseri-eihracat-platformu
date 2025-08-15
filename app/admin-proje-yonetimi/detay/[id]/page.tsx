@@ -23,8 +23,13 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function AdminProjeDetayPage({ params }: { params: { id: string } }) {
-  console.log('🚀 Admin proje detay sayfası yükleniyor, ID:', params.id);
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function AdminProjeDetayPage({ params }: PageProps) {
+  const { id } = await params;
+  console.log('🚀 Admin proje detay sayfası yükleniyor, ID:', id);
   
   return (
     <Suspense fallback={
@@ -35,7 +40,7 @@ export default function AdminProjeDetayPage({ params }: { params: { id: string }
         </div>
       </div>
     }>
-      <ProjeDetayClient projeId={params.id} />
+      <ProjeDetayClient projeId={id} />
     </Suspense>
   );
 }

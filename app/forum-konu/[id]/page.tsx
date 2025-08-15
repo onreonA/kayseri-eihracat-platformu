@@ -14,7 +14,12 @@ export async function generateStaticParams() {
   return staticParams;
 }
 
-export default function ForumKonuPage({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function ForumKonuPage({ params }: PageProps) {
+  const { id } = await params;
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -24,7 +29,7 @@ export default function ForumKonuPage({ params }: { params: { id: string } }) {
         </div>
       </div>
     }>
-      <ForumKonuClient konuId={params.id} />
+      <ForumKonuClient konuId={id} />
     </Suspense>
   );
 }
