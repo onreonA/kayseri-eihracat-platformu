@@ -2809,4 +2809,92 @@ export class SupabaseEgitimService {
       throw error;
     }
   }
+
+  static async getEgitimVideolari(setId: number) {
+    try {
+      const { data, error } = await supabase
+        .from('egitim_videolari')
+        .select('*')
+        .eq('set_id', setId)
+        .order('sira_no', { ascending: true });
+
+      if (error) throw error;
+      return data || [];
+    } catch (error) {
+      console.error('Eğitim videoları yüklenirken hata:', error);
+      return [];
+    }
+  }
+
+  static async createEgitimVideo(data: {
+    setId: number;
+    baslik: string;
+    aciklama: string;
+    videoUrl: string;
+    siraNo: number;
+  }) {
+    try {
+      const { data: newVideo, error } = await supabase
+        .from('egitim_videolari')
+        .insert([{
+          set_id: data.setId,
+          baslik: data.baslik,
+          aciklama: data.aciklama,
+          video_url: data.videoUrl,
+          sira_no: data.siraNo,
+          created_at: new Date().toISOString()
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+      return newVideo;
+    } catch (error) {
+      console.error('Eğitim videosu oluşturulurken hata:', error);
+      throw error;
+    }
+  }
+
+  static async updateEgitimVideo(id: number, data: {
+    baslik?: string;
+    aciklama?: string;
+    videoUrl?: string;
+    siraNo?: number;
+  }) {
+    try {
+      const updateData: any = {};
+      if (data.baslik) updateData.baslik = data.baslik;
+      if (data.aciklama) updateData.aciklama = data.aciklama;
+      if (data.videoUrl) updateData.video_url = data.videoUrl;
+      if (data.siraNo) updateData.sira_no = data.siraNo;
+
+      const { data: updatedVideo, error } = await supabase
+        .from('egitim_videolari')
+        .update(updateData)
+        .eq('id', id)
+        .select()
+        .single();
+
+      if (error) throw error;
+      return updatedVideo;
+    } catch (error) {
+      console.error('Eğitim videosu güncellenirken hata:', error);
+      throw error;
+    }
+  }
+
+  static async deleteEgitimVideo(id: number) {
+    try {
+      const { error } = await supabase
+        .from('egitim_videolari')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+      return true;
+    } catch (error) {
+      console.error('Eğitim videosu silinirken hata:', error);
+      throw error;
+    }
+  }
 }
