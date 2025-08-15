@@ -422,14 +422,12 @@ export default function AdminEgitimYonetimiPage() {
 
       console.log('🎥 Video ekleniyor...');
 
-      const newVideo = await SupabaseEgitimService.createEgitimVideosu({
-        egitimSetId: selectedSet.id,
-        videoAdi: videoForm.videoAdi.trim(),
+      const newVideo = await SupabaseEgitimService.createEgitimVideo({
+        setId: selectedSet.id,
+        baslik: videoForm.videoAdi.trim(),
+        aciklama: videoForm.aciklama?.trim() || '',
         videoUrl: videoForm.videoUrl.trim(),
-        videoSuresi: videoForm.videoSuresi,
         siraNo: videoForm.siraNo,
-        aciklama: videoForm.aciklama.trim(),
-        pdfUrl: videoForm.pdfUrl.trim() || undefined,
       });
 
       if (newVideo) {
