@@ -390,7 +390,7 @@ export default function AdminFirmaDetayClient({ firmaId }: AdminFirmaDetayClient
   const [message, setMessage] = useState('');
   const [editingService, setEditingService] = useState<number | null>(null);
   const [editServiceData, setEditServiceData] = useState({
-    durum: '' as 'Başlamadı' | 'Devam Ediyor' | 'Tamamlandı' | '',
+    durum: undefined as 'Başlamadı' | 'Devam Ediyor' | 'Tamamlandı' | undefined,
     ilerlemeYuzdesi: 0,
     danismanNotlari: ''
   });
