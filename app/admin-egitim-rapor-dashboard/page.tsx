@@ -152,7 +152,7 @@ export default function AdminEgitimRaporDashboardPage() {
         `)
         .eq('durum', 'Aktif');
 
-      const mockFirmaIlerlemeleri: FirmaEgitimIlerlemesi[] = (firmalarData || []).map((firma: any, index) => {
+      const mockFirmaIlerlemeleri: FirmaEgitimIlerlemesi[] = (firmalarData || []).map((firma: any, index: number) => {
         const atananSetSayisi = Math.floor(Math.random() * 5) + 1;
         const tamamlananSetSayisi = Math.floor(Math.random() * atananSetSayisi);
         const toplamVideo = atananSetSayisi * (Math.floor(Math.random() * 8) + 2);
