@@ -235,7 +235,7 @@ class FirmaHizmetleriManager {
       console.log('💾 Firma hizmetleri kaydediliyor:', firmaId, hizmetler.length, 'hizmet');
 
       const savedData = localStorage.getItem(FIRMA_HIZMETLERI_STORAGE_KEY);
-      let allData = {};
+      let allData: { [key: string]: FirmaHizmeti[] } = {};
 
       if (savedData) {
         allData = JSON.parse(savedData);
