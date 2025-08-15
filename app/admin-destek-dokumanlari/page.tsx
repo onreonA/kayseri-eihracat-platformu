@@ -203,7 +203,7 @@ export default function AdminDestekDokumanlariPage() {
     BelgeAdı: '',
     BelgeURL: '',
     Açıklama: '',
-    Kategori: 'Genel Bilgi' as const,
+    Kategori: 'Genel Bilgi' as 'B2B Rehber' | 'B2C Kılavuz' | 'Teşvik Form' | 'Genel Bilgi',
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedKategori, setSelectedKategori] = useState('Tümü');
