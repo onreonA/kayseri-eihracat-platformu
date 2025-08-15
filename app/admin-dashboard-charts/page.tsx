@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { getSupabaseClient } from '@/lib/supabaseClient';
 
 interface FirmaGrafik {
+  id: number;
   FirmaAdi: string;
   GenelIlerleme: number;
   TamamlananGorev: number;
@@ -107,7 +108,7 @@ export default function AdminDashboardChartsPage() {
       // Grafik verilerini hesapla
       const grafikVerileri: FirmaGrafik[] = [];
 
-      for (const firma of firmalar) {
+      firmalar.forEach((firma: any, index: number) => {
         const firmaGorevleri = gorevler.filter((g: any) =>
           Array.isArray(g.atanan_firmalar) && g.atanan_firmalar.includes(firma.id)
         );
@@ -132,13 +133,14 @@ export default function AdminDashboardChartsPage() {
         const projeKatilimi = new Set(firmaGorevleri.map((g: any) => g.proje_id)).size;
 
         grafikVerileri.push({
+          id: firma.id || index + 1,
           FirmaAdi: firma.firma_adi,
           GenelIlerleme: genelIlerlemeYuzdesi,
           TamamlananGorev: tamamlananGorevSayisi,
           ToplamGorev: firmaGorevleri.length,
           ProjeKatilimi: projeKatilimi,
         });
-      }
+      });
 
       setFirmaGrafikleri(grafikVerileri.sort((a, b) => b.GenelIlerleme - a.GenelIlerleme));
 
