@@ -172,7 +172,7 @@ export default function AdminEgitimRaporDashboardPage() {
         };
       });
 
-      const mockSetIlerlemeleri: SetIlerlemesi[] = (setlerData || []).map((set) => {
+      const mockSetIlerlemeleri: SetIlerlemesi[] = (setlerData || []).map((set: any) => {
         const atananFirmaSayisi = Array.isArray(set.atanan_firmalar) ? set.atanan_firmalar.length : Math.floor(Math.random() * 5) + 1;
         const tamamlananFirmaSayisi = Math.floor(atananFirmaSayisi * (0.4 + Math.random() * 0.6));
 
