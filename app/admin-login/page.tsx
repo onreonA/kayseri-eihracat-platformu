@@ -48,8 +48,8 @@ export default function AdminLoginPage() {
           router.push('/admin-dashboard');
           return;
         } else {
-          console.log('❌ Backend admin girişi başarısız:', data.error?.message);
-          setError(data.error?.message || 'Geçersiz admin bilgileri.');
+          console.log('❌ Backend admin girişi başarısız:', (data.error as any)?.message);
+          setError((data.error as any)?.message || 'Geçersiz admin bilgileri.');
           setLoading(false);
           return;
         }

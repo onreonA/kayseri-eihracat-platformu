@@ -240,7 +240,7 @@ export default function AdminKullaniciYonetimiPage() {
 
       loadUsers();
     } catch (error) {
-      console.error('[AdminKullaniciYonetimi]', error?.message, error);
+      console.error('[AdminKullaniciYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
     }
   };
@@ -266,7 +266,7 @@ export default function AdminKullaniciYonetimiPage() {
       localStorage.removeItem('adminEmail');
       router.push('/admin-login');
     } catch (error) {
-      console.error('[AdminKullaniciYonetimi]', error?.message, error);
+      console.error('[AdminKullaniciYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.push('/admin-login');
     }
   };

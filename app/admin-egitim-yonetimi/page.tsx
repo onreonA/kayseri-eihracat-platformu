@@ -195,7 +195,7 @@ export default function AdminEgitimYonetimiPage() {
 
       loadAllData();
     } catch (error) {
-      console.error('[AdminEgitimYonetimi]', error?.message, error);
+      console.error('[AdminEgitimYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
     }
   };
@@ -215,7 +215,7 @@ export default function AdminEgitimYonetimiPage() {
       setEgitimSetleri(setlerData || []);
       setFirmalar(firmalarData || []);
     } catch (error) {
-      console.error('[AdminEgitimYonetimi]', error?.message, error);
+      console.error('[AdminEgitimYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       setEgitimSetleri([]);
       setFirmalar([]);
       showMessage('Veri yüklenirken sorun oluştu, sistem çalışmaya devam ediyor.', 'error');
@@ -634,7 +634,7 @@ export default function AdminEgitimYonetimiPage() {
       }
       router.push('/admin-login');
     } catch (error) {
-      console.error('[AdminEgitimYonetimi]', error?.message, error);
+      console.error('[AdminEgitimYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.push('/admin-login');
     }
   };

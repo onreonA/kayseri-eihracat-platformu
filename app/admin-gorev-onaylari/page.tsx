@@ -505,7 +505,7 @@ export default function AdminGorevOnaylariPage() {
         return;
       }
     } catch (error) {
-      console.error('[AdminGorevOnaylari]', error?.message, error);
+      console.error('[AdminGorevOnaylari]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
     }
   };
@@ -609,7 +609,7 @@ export default function AdminGorevOnaylariPage() {
       localStorage.removeItem('adminEmail');
       router.push('/admin-login');
     } catch (error) {
-      console.error('[AdminGorevOnaylari]', error?.message, error);
+      console.error('[AdminGorevOnaylari]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.push('/admin-login');
     }
   };

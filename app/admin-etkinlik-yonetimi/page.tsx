@@ -179,7 +179,7 @@ export default function AdminEtkinlikYonetimiPage() {
 
       loadData();
     } catch (error) {
-      console.error('[AdminEtkinlikYonetimi]', error?.message, error);
+      console.error('[AdminEtkinlikYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
     }
   };
@@ -216,7 +216,7 @@ export default function AdminEtkinlikYonetimiPage() {
       }
       router.push('/admin-login');
     } catch (error) {
-      console.error('[AdminEtkinlikYonetimi]', error?.message, error);
+      console.error('[AdminEtkinlikYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.push('/admin-login');
     }
   };

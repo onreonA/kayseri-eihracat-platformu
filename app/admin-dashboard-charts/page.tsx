@@ -54,7 +54,7 @@ export default function AdminDashboardChartsPage() {
         return;
       }
     } catch (error) {
-      console.error('[AdminDashboardCharts]', error?.message, error);
+      console.error('[AdminDashboardCharts]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
     }
   };
@@ -479,7 +479,7 @@ export default function AdminDashboardChartsPage() {
       }
       router.push('/');
     } catch (error) {
-      console.error('[AdminDashboardCharts]', error?.message, error);
+      console.error('[AdminDashboardCharts]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.push('/');
     }
   };

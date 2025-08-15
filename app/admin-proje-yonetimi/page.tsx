@@ -129,7 +129,7 @@ export default function AdminProjeYonetimiPage() {
 
       await loadDirectSupabaseData();
     } catch (error) {
-      console.error('[AdminProjeYonetimi]', error?.message, error);
+      console.error('[AdminProjeYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
       setLoading(false);
     }
@@ -357,7 +357,7 @@ export default function AdminProjeYonetimiPage() {
       }
       router.push('/');
     } catch (error) {
-      console.error('[AdminProjeYonetimi]', error?.message, error);
+      console.error('[AdminProjeYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.push('/');
     }
   };

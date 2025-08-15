@@ -70,7 +70,7 @@ export default function SupabaseHealthCheck() {
       } catch (error: any) {
         healthCheck.testQuery = {
           success: false,
-          error: `Query exception: ${error?.message || 'Unknown error'}`
+          error: `Query exception: ${error instanceof Error ? error.message : 'Unknown error'}`
         };
       }
 
@@ -92,7 +92,7 @@ export default function SupabaseHealthCheck() {
       } catch (error: any) {
         healthCheck.authTest = {
           success: false,
-          error: `Auth exception: ${error?.message || 'Unknown error'}`
+          error: `Auth exception: ${error instanceof Error ? error.message : 'Unknown error'}`
         };
       }
     }

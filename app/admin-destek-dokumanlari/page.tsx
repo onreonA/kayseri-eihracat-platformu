@@ -259,7 +259,7 @@ export default function AdminDestekDokumanlariPage() {
       }
 
     } catch (error) {
-      console.error('[AdminDestekDokumanlari]', error?.message, error);
+      console.error('[AdminDestekDokumanlari]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
     }
   };

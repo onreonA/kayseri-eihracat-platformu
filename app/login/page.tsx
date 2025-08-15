@@ -231,7 +231,7 @@ export default function LoginPage() {
         // Redirect to dashboard
         router.push('/dashboard');
       } else {
-        setError(data.error?.message || 'Giriş başarısız!');
+        setError((data.error as any)?.message || 'Giriş başarısız!');
         setLoading(false);
       }
     } catch (error: any) {

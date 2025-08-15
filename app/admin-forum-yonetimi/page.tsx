@@ -141,7 +141,7 @@ export default function AdminForumYonetimiPage() {
 
       loadData();
     } catch (error) {
-      console.error('[AdminForumYonetimi]', error?.message, error);
+      console.error('[AdminForumYonetimi]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
     }
   };

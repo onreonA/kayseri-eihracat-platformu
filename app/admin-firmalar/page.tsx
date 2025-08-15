@@ -330,7 +330,7 @@ export default function AdminFirmalarPage() {
 
       initializeSupabaseOnlySystem();
     } catch (error) {
-      console.error('[AdminFirmalar]', error?.message, error);
+      console.error('[AdminFirmalar]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
     }
   };
@@ -390,7 +390,7 @@ export default function AdminFirmalarPage() {
       }
       router.push('/admin-login');
     } catch (error) {
-      console.error('[AdminFirmalar]', error?.message, error);
+      console.error('[AdminFirmalar]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.push('/admin-login');
     }
   };

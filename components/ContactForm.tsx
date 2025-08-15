@@ -44,11 +44,11 @@ export default function ContactForm() {
         });
       } else {
         setMessageType('error');
-        setMessage(response.error?.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
+        setMessage((response.error as any)?.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
       }
     } catch (error) {
       setMessageType('error');
-      setMessage(error.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
+      setMessage(error instanceof Error ? error.message : 'Bir hata oluştu. Lütfen tekrar deneyin.');
     } finally {
       setLoading(false);
     }

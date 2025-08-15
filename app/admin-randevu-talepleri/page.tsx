@@ -172,7 +172,7 @@ export default function AdminRandevuTalepleriPage() {
         console.log('❌ Admin girişi bulunamadı, login\'e yönlendiriliyor...');
         router.push('/admin-login');
       } catch (error) {
-        console.error('[RandevuTalepleri]', error?.message, error);
+        console.error('[RandevuTalepleri]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
         router.push('/admin-login');
       }
     };

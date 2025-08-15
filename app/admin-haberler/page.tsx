@@ -158,7 +158,7 @@ export default function AdminHaberlerPage() {
 
       loadData();
     } catch (error) {
-      console.error('[AdminHaberler]', error?.message, error);
+      console.error('[AdminHaberler]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/admin-login');
     }
   };
@@ -176,7 +176,7 @@ export default function AdminHaberlerPage() {
       // İstatistikleri hesapla
       await calculateStats();
     } catch (error) {
-      console.error('[AdminHaberler]', error?.message, error);
+      console.error('[AdminHaberler]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       addToast({ message: 'Veriler yüklenirken hata oluştu', type: 'error' });
     } finally {
       setLoading(false);
@@ -204,7 +204,7 @@ export default function AdminHaberlerPage() {
 
       setHaberler(haberlerWithStats);
     } catch (error) {
-      console.error('[AdminHaberler]', error?.message, error);
+      console.error('[AdminHaberler]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       throw error;
     }
   };
@@ -223,7 +223,7 @@ export default function AdminHaberlerPage() {
 
       setEtiketler(data || []);
     } catch (error) {
-      console.error('[AdminHaberler]', error?.message, error);
+      console.error('[AdminHaberler]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       throw error;
     }
   };
@@ -251,7 +251,7 @@ export default function AdminHaberlerPage() {
 
       setStats(newStats);
     } catch (error) {
-      console.error('[AdminHaberler]', error?.message, error);
+      console.error('[AdminHaberler]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
     }
   };
 
@@ -315,7 +315,7 @@ export default function AdminHaberlerPage() {
       setEditingHaber(null);
       await loadData();
     } catch (error) {
-      console.error('[AdminHaberler]', error?.message, error);
+      console.error('[AdminHaberler]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       addToast({ message: 'Haber kaydedilirken hata oluştu', type: 'error' });
     }
   };
@@ -336,7 +336,7 @@ export default function AdminHaberlerPage() {
       addToast({ message: 'Haber başarıyla silindi', type: 'success' });
       await loadData();
     } catch (error) {
-      console.error('[AdminHaberler]', error?.message, error);
+      console.error('[AdminHaberler]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       addToast({ message: 'Haber silinirken hata oluştu', type: 'error' });
     }
   };
@@ -356,7 +356,7 @@ export default function AdminHaberlerPage() {
       addToast({ message: 'Haber durumu güncellendi', type: 'success' });
       await loadData();
     } catch (error) {
-      console.error('[AdminHaberler]', error?.message, error);
+      console.error('[AdminHaberler]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       addToast({ message: 'Durum güncellenirken hata oluştu', type: 'error' });
     }
   };
@@ -385,7 +385,7 @@ export default function AdminHaberlerPage() {
       }
       router.push('/');
     } catch (error) {
-      console.error('[AdminHaberler]', error?.message, error);
+      console.error('[AdminHaberler]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.push('/');
     }
   };

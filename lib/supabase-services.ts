@@ -42,7 +42,7 @@ try {
 
   console.log('Supabase client created successfully');
 } catch (error) {
-  console.error('Supabase client creation failed ->', error?.message, error);
+  console.error('Supabase client creation failed ->', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
   supabaseClient = null;
 }
 
@@ -59,7 +59,7 @@ const isSupabaseConnected = () => {
 
     return true;
   } catch (error) {
-    console.error('Supabase connection check failed ->', error?.message, error);
+    console.error('Supabase connection check failed ->', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
     return false;
   }
 };
@@ -1953,7 +1953,7 @@ export class SupabaseEgitimService {
 
     } catch (error: any) {
       console.warn('Getting user education sets system error, using mock data:', {
-        错误信息: error?.message || '未知错误',
+        错误信息: error instanceof Error ? error.message : '未知错误',
         公司ID: firmaId,
         上下文: '主函数执行失败'
       });
@@ -2498,7 +2498,7 @@ export class SupabaseEtkinlikService {
 
     } catch (error: any) {
       console.warn('获取公司活动系统错误，使用模拟数据：', {
-        message: error?.message || '未知错误',
+        message: error instanceof Error ? error.message : '未知错误',
         firmaId: firmaId
       });
       return this.getMockFirmaEtkinlikleri(firmaId);
@@ -2635,7 +2635,7 @@ export class SupabaseEtkinlikService {
 
     } catch (error: any) {
       console.warn('获取公司参与活动系统错误，使用模拟数据：', {
-        message: error?.message || '未知错误',
+        message: error instanceof Error ? error.message : '未知错误',
         firmaId: firmaId
       });
       return this.getMockKatilimEtkinlikler(firmaId);
@@ -2725,7 +2725,7 @@ export class SupabaseEtkinlikService {
 
     } catch (error: any) {
       console.warn('参加活动系统错误，返回模拟成功：', {
-        message: error?.message || '未知错误',
+        message: error instanceof Error ? error.message : '未知错误',
         firmaId: firmaId,
         etkinlikId: etkinlikId
       });
