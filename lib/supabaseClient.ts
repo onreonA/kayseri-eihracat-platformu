@@ -1,5 +1,5 @@
 
-import { createBrowserClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 
 // Always use hardcoded values for production deployment
 const getSupabaseConfig = () => {
@@ -26,7 +26,7 @@ export const getSupabaseClient = () => {
   if (!supabaseClient) {
     try {
       const { SUPABASE_URL, SUPABASE_ANON_KEY } = getSupabaseConfig();
-      supabaseClient = createBrowserClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       console.log('✅ Supabase client created successfully');
     } catch (error) {
       console.error('❌ Supabase client creation failed:', error);
