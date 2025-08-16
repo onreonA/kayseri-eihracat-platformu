@@ -101,7 +101,7 @@ export default function AltProjeDetayClient({ altProjeId }: AltProjeDetayClientP
 
       setSession(session);
 
-      const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event: any, session) => {
         if (event === 'SIGNED_OUT' || !session) {
           console.log('🚪 Kullanıcı logout oldu, yönlendiriliyor...');
           router.replace('/login');
