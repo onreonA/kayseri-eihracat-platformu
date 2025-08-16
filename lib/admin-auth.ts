@@ -44,10 +44,15 @@ export const checkAdminAuth = async (): Promise<AdminAuthResult> => {
 
 export const adminLogout = async () => {
   try {
-    // LocalStorage temizliği
-    localStorage.removeItem('isAdminLoggedIn');
-    localStorage.removeItem('admin_token');
-    localStorage.removeItem('adminEmail');
+    // Complete admin localStorage cleanup
+    const adminKeysToRemove = [
+      'isAdminLoggedIn', 'admin_token', 'adminEmail', 'adminRole', 
+      'adminId', 'adminName', 'admin_data'
+    ];
+    
+    adminKeysToRemove.forEach(key => {
+      localStorage.removeItem(key);
+    });
     
     // Supabase logout
     const supabase = getSupabaseClient();
@@ -55,7 +60,7 @@ export const adminLogout = async () => {
       await supabase.auth.signOut();
     }
     
-    console.log('✅ Admin logout başarılı');
+    console.log('✅ Admin logout - tüm admin verileri temizlendi');
     return true;
   } catch (error) {
     console.error('Admin logout hatası:', error);

@@ -145,11 +145,18 @@ class SecureLoginService {
       
       // Tüm eski format verilerini temizle
       const keysToRemove = [
+        // User login data
         'isLoggedIn', 'userEmail', 'firmaAdi', 'firmaId',
-        'testUser', 'demoUser', 'adminUser',
         'login_data', 'user_data', 'firma_data',
+        // Admin login data  
+        'isAdminLoggedIn', 'adminEmail', 'adminRole', 'adminId', 'adminName', 'admin_token',
+        // Test/demo data
+        'testUser', 'demoUser', 'adminUser',
+        // App data caches
         'projeler', 'egitimler', 'forum_konular', 'etkinlikler',
-        'dashboard_data', 'stats_data', 'activities_data'
+        'dashboard_data', 'stats_data', 'activities_data',
+        // Debug/development data
+        'debug_mode', 'dev_settings', 'mock_data_enabled'
       ];
 
       keysToRemove.forEach((key) => {

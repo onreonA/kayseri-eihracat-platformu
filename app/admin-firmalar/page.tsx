@@ -337,7 +337,7 @@ export default function AdminFirmalarPage() {
       
       if (directClient) {
         try {
-          console.log('🧪 Testing browser-based Supabase connection...');
+          // console.log('🧪 Testing browser-based Supabase connection...'); // Debug disabled for production
           const { data: testData, error: testError } = await directClient
             .from('firmalar')
             .select('id, firma_adi')
