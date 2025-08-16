@@ -996,7 +996,7 @@ export default function AdminFirmaDetayClient({ firmaId }: AdminFirmaDetayClient
                                   <select
                                     value={editServiceData.durum}
                                     onChange={(e) =>
-                                      setEditServiceData(prev => ({ ...prev, durum: e.target.value }))
+                                      setEditServiceData(prev => ({ ...prev, durum: e.target.value as 'Başlamadı' | 'Devam Ediyor' | 'Tamamlandı' | undefined }))
                                     }
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm pr-8"
                                   >
