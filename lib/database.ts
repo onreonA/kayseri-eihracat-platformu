@@ -2932,3 +2932,66 @@ export class SupabaseEgitimService {
     }
   }
 }
+
+// SUPABASE ONLY: Admin firma servisi
+export class AdminFirmaService {
+  static async getAllFirmalar() {
+    try {
+      if (!supabase) {
+        console.error('Supabase bağlantısı yok');
+        return [];
+      }
+
+      const { data: firmalar, error } = await supabase
+        .from('firmalar')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Firmalar yüklenirken hata:', error);
+        return [];
+      }
+
+      return firmalar || [];
+    } catch (error) {
+      console.error('Firmalar sistem hatası:', error);
+      return [];
+    }
+  }
+
+  static async addFirma(data: {
+    firmaAdi: string;
+    yetkiliEmail: string;
+    yetkiliTelefon: string;
+  }) {
+    try {
+      if (!supabase) {
+        console.error('Supabase bağlantısı yok');
+        return null;
+      }
+
+      const { data: newFirma, error } = await supabase
+        .from('firmalar')
+        .insert([{
+          firma_adi: data.firmaAdi,
+          yetkili_email: data.yetkiliEmail,
+          telefon: data.yetkiliTelefon,
+          durum: 'Aktif',
+          firma_profil_durumu: 'Eksik',
+          created_at: new Date().toISOString()
+        }])
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Firma eklenirken hata:', error);
+        return null;
+      }
+
+      return newFirma;
+    } catch (error) {
+      console.error('Firma ekleme sistem hatası:', error);
+      return null;
+    }
+  }
+}
