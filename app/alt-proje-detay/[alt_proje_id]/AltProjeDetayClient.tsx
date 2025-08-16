@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getSupabaseClient } from '@/lib/supabaseClient';
-import type { Session } from '@supabase/supabase-js';
+// Manual client does not need Session type
 
 interface AltProje {
   id: string;
@@ -49,7 +49,7 @@ interface AltProjeDetayClientProps {
 export default function AltProjeDetayClient({ altProjeId }: AltProjeDetayClientProps) {
   const [altProje, setAltProje] = useState<AltProje | null>(null);
   const [gorevler, setGorevler] = useState<Gorev[]>([]);
-  const [session, setSession] = useState<Session | null>(null);
+  const [session, setSession] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [firmaId, setFirmaId] = useState<number | null>(null);
   const [firmaAdi, setFirmaAdi] = useState<string>('');
