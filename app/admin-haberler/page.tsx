@@ -244,9 +244,9 @@ export default function AdminHaberlerPage() {
 
       const newStats = {
         toplam: data?.length || 0,
-        yayinda: data?.filter(h => h.durum === 'yayinda').length || 0,
-        taslak: data?.filter(h => h.durum === 'taslak').length || 0,
-        bu_ay: data?.filter(h => new Date(h.olusturma_tarihi) >= thisMonth).length || 0
+        yayinda: data?.filter((h: any) => h.durum === 'yayinda').length || 0,
+        taslak: data?.filter((h: any) => h.durum === 'taslak').length || 0,
+        bu_ay: data?.filter((h: any) => new Date(h.olusturma_tarihi) >= thisMonth).length || 0
       };
 
       setStats(newStats);
