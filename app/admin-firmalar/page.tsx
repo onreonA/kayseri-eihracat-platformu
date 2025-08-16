@@ -170,7 +170,7 @@ class SupabaseOnlyDataManager {
       console.log(` Supabase\'dan ${supabaseFirmalar?.length || 0} firma yüklendi`);
 
       // Convert Supabase data to frontend format
-      const convertedFirmalar: Firma[] = (supabaseFirmalar || []).map((firma) => ({
+      const convertedFirmalar: Firma[] = (supabaseFirmalar || []).map((firma: any) => ({
         id: firma.id,
         firmaAdi: firma.firma_adi || '',
         yetkiliEmail: firma.yetkili_email || '',
