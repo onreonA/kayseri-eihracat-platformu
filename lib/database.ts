@@ -101,6 +101,12 @@ export class AdminFirmaService {
     firmaAdi: string;
     yetkiliEmail: string;
     yetkiliTelefon: string;
+    adres?: string;
+    durum?: string;
+    firmaProfilDurumu?: string;
+    sifre?: string;
+    sektor?: string;
+    yetkiliAdi?: string;
   }) {
     try {
       if (!supabase) {
@@ -114,8 +120,12 @@ export class AdminFirmaService {
           firma_adi: data.firmaAdi,
           yetkili_email: data.yetkiliEmail,
           telefon: data.yetkiliTelefon,
-          durum: 'Aktif',
-          firma_profil_durumu: 'Eksik',
+          adres: data.adres || '',
+          durum: data.durum || 'Aktif',
+          firma_profil_durumu: data.firmaProfilDurumu || 'Eksik',
+          sifre: data.sifre || '123456',
+          sektor: data.sektor || '',
+          yetkili_adi: data.yetkiliAdi || '',
           created_at: new Date().toISOString()
         }])
         .select()
