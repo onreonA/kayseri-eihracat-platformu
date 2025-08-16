@@ -22,7 +22,13 @@
     "type-check": "tsc --noEmit",
     "clean": "rm -rf .next out node_modules/.cache",
     "install-deps": "npm install",
-    "rebuild": "npm run clean && npm install && npm run build"
+    "rebuild": "npm run clean && npm install && npm run build",
+    "test": "node scripts/run-validation-tests.js",
+    "test:production": "NODE_ENV=production node scripts/run-validation-tests.js",
+    "deploy": "./scripts/deploy.sh",
+    "deploy:production": "NODE_ENV=production ./scripts/deploy.sh",
+    "vercel:deploy": "vercel --prod",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.19.3",

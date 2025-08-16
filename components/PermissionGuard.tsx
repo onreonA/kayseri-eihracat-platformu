@@ -409,15 +409,4 @@ export function PermissionDebug({ userId, permissions }: PermissionDebugProps) {
   );
 }
 
-// Export all components and hooks
-export {
-  PermissionGuardComponent as PermissionGuardComponent,
-  ConditionalRender,
-  PermissionNavItem,
-  PermissionButton,
-  ResourcePermissionGuard,
-  RoleGuard,
-  usePermission,
-  usePermissions,
-  PermissionDebug
-};
+
