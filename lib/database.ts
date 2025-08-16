@@ -1939,7 +1939,11 @@ export class ForumService {
   }
 
   // Test verileri ekleme metodu
+  // DISABLED FOR PRODUCTION: Test data insertion
   static async addTestData(): Promise<boolean> {
+    console.warn('⚠️ addTestData() disabled for production!');
+    return false;
+    /*
     try {
       console.log('Forum test verileri ekleniyor...');
 
@@ -2055,6 +2059,7 @@ export class ForumService {
       console.error('Test verileri ekleme hatası:', error);
       return false;
     }
+    */
   }
 
   static async getKonuDetay(konuId: number): Promise<any> {

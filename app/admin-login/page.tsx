@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getSupabaseClient } from '@/lib/supabaseClient';
-import apiService from '@/lib/api';
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
@@ -32,32 +31,54 @@ export default function AdminLoginPage() {
 
       const cleanEmail = email.toLowerCase().trim();
       
-      // Backend API ile admin girişi (apiService üzerinden)
+      // Direct Supabase admin authentication (no backend API dependency)
       try {
-        const data = await apiService.admin.login(cleanEmail, password);
+        const supabase = getSupabaseClient();
+        
+        if (supabase) {
+          console.log('🔍 Supabase admin girişi deneniyor...');
+          
+          // Try Supabase auth for admin users
+          const { data: userData, error: authError } = await supabase.auth.signInWithPassword({
+            email: cleanEmail,
+            password: password
+          });
 
-        if (data.success && data.data?.token && data.data?.admin) {
-          console.log('✅ Backend admin girişi başarılı:', data.data.admin.name);
+          if (!authError && userData?.user) {
+            // Check if user has admin role in database
+            const { data: adminData, error: adminCheckError } = await supabase
+              .from('users')
+              .select('id, email, role, name')
+              .eq('email', cleanEmail)
+              .eq('role', 'admin')
+              .single();
 
-          // Admin bilgilerini localStorage'a kaydet
-          localStorage.setItem('isAdminLoggedIn', 'true');
-          localStorage.setItem('adminEmail', data.data.admin.email);
-          localStorage.setItem('adminRole', data.data.admin.role);
-          localStorage.setItem('adminId', '1');
-          localStorage.setItem('adminName', data.data.admin.name);
-          localStorage.setItem('admin_token', data.data.token);
+            if (!adminCheckError && adminData) {
+              console.log('✅ Supabase admin girişi başarılı:', adminData.name);
 
-          console.log('✅ Admin bilgileri kaydedildi, yönlendiriliyor...');
-          router.push('/admin-dashboard');
-          return;
-        } else {
-          console.log('❌ Backend admin girişi başarısız:', (data.error as any)?.message);
-          setError((data.error as any)?.message || 'Geçersiz admin bilgileri.');
-          setLoading(false);
-          return;
+              // Admin bilgilerini localStorage'a kaydet
+              localStorage.setItem('isAdminLoggedIn', 'true');
+              localStorage.setItem('adminEmail', adminData.email);
+              localStorage.setItem('adminRole', adminData.role);
+              localStorage.setItem('adminId', adminData.id.toString());
+              localStorage.setItem('adminName', adminData.name);
+              localStorage.setItem('admin_token', 'supabase_token_' + Date.now());
+
+              console.log('✅ Supabase admin bilgileri kaydedildi, yönlendiriliyor...');
+              router.push('/admin-dashboard');
+              return;
+            } else {
+              console.log('❌ Admin yetkisi bulunamadı');
+              setError('Bu hesap admin yetkisine sahip değil.');
+              setLoading(false);
+              return;
+            }
+          } else {
+            console.log('❌ Supabase auth hatası:', authError?.message);
+          }
         }
-      } catch (apiError) {
-        console.log('❌ Backend API hatası:', apiError);
+      } catch (supabaseError) {
+        console.log('❌ Supabase bağlantı hatası:', supabaseError);
         
         // Production fallback: Only master admin (temporary until full Supabase migration)
         const validAdmins = [
