@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getSupabaseClient } from '@/lib/supabaseClient';
 import { AdminFirmaService, DataCleanupService } from '../../lib/database';
+import { checkAdminAuth, adminLogout, getAdminInfo } from '../../lib/admin-auth';
 
 interface Firma {
   id: number;
@@ -290,7 +291,7 @@ export default function AdminFirmalarPage() {
   const router = useRouter();
 
   useEffect(() => {
-    checkAdminAuth();
+    handleAuthCheck();
 
     const timer = setInterval(() => {
       setCurrentTime(new Date());
