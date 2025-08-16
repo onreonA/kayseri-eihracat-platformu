@@ -375,8 +375,8 @@ export default function AltProjeDetayClient({ altProjeId }: AltProjeDetayClientP
       }
 
     } catch (error) {
-      console.error('💥 Tamamlama talebi sistem hatası ->', error?.message || error);
-      alert(`Beklenmeyen sistem hatası oluştu: ${error?.message || 'Lütfen tekrar deneyin.'}`);
+      console.error('💥 Tamamlama talebi sistem hatası ->', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
+      alert(`Beklenmeyen sistem hatası oluştu: ${error instanceof Error ? error.message : 'Lütfen tekrar deneyin.'}`);
     } finally {
       setSubmitLoading(null);
     }
