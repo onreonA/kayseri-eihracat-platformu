@@ -2,11 +2,12 @@ import { Suspense } from 'react';
 import AltProjeDuzenleClient from './AltProjeDuzenleClient';
 
 export async function generateStaticParams() {
+  // Reduced to prevent Vercel build size limit
   const staticParams = [];
   
-  // 1-100 arası proje ID'leri ve 1-500 arası alt proje ID'leri için parametre oluştur
-  for (let projeId = 1; projeId <= 100; projeId++) {
-    for (let altProjeId = 1; altProjeId <= 100; altProjeId++) {
+  // Only generate for first 5 projects with 5 sub-projects each (25 total instead of 10,000)
+  for (let projeId = 1; projeId <= 5; projeId++) {
+    for (let altProjeId = 1; altProjeId <= 5; altProjeId++) {
       staticParams.push({ 
         projeId: projeId.toString(), 
         altProjeId: altProjeId.toString() 
@@ -14,7 +15,7 @@ export async function generateStaticParams() {
     }
   }
   
-  console.log('📋 Alt proje düzenleme parametreleri oluşturuldu:', staticParams.length, 'parametre');
+  console.log('📋 Alt proje düzenleme parametreleri oluşturuldu (reduced):', staticParams.length, 'parametre');
   
   return staticParams;
 }

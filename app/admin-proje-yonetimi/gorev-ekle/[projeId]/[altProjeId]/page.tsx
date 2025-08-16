@@ -5,9 +5,9 @@ import AltProjeGorevEkleClient from './AltProjeGorevEkleClient';
 export async function generateStaticParams() {
   const staticParams = [];
   
-  // Proje ID'leri 1-100 arası, Alt Proje ID'leri 1-50 arası
-  for (let projeId = 1; projeId <= 100; projeId++) {
-    for (let altProjeId = 1; altProjeId <= 50; altProjeId++) {
+  // Reduced for Vercel build size limit: 5x5 = 25 total
+  for (let projeId = 1; projeId <= 5; projeId++) {
+    for (let altProjeId = 1; altProjeId <= 5; altProjeId++) {
       staticParams.push({ 
         projeId: projeId.toString(), 
         altProjeId: altProjeId.toString() 

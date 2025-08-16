@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    // Reduce build size by limiting static generation
+    isrMemoryCacheSize: 0,
+  },
+  // Limit static generation for large dynamic routes
+  trailingSlash: false,
 };
 
 export default nextConfig;

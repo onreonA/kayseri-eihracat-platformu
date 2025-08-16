@@ -6,9 +6,9 @@ import GorevDuzenleClient from './GorevDuzenleClient';
 export async function generateStaticParams() {
   const staticParams = [];
   
-  // Proje ID'leri 1-100 arası, Görev ID'leri 1-200 arası
-  for (let projeId = 1; projeId <= 100; projeId++) {
-    for (let gorevId = 1; gorevId <= 50; gorevId++) {
+  // Reduced for Vercel build size limit: 5x5 = 25 total  
+  for (let projeId = 1; projeId <= 5; projeId++) {
+    for (let gorevId = 1; gorevId <= 5; gorevId++) {
       staticParams.push({ 
         projeId: projeId.toString(), 
         gorevId: gorevId.toString() 
