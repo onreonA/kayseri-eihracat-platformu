@@ -691,7 +691,7 @@ export default function FirmaProfilPage() {
   }
 
   return (
-    <ModernLayout currentPage="/firma-profil">
+    <ModernLayout>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
         {/* Header */}
         <div className="bg-white shadow-sm border-b border-gray-100 mb-8">

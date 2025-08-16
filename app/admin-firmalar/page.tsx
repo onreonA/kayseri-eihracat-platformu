@@ -364,7 +364,7 @@ export default function AdminFirmalarPage() {
             sampleData: testData?.[0] || null
           });
         } catch (e) {
-          console.log('❌ Direct client test failed:', e.message || e);
+          console.log('❌ Direct client test failed:', e instanceof Error ? e.message : e);
         }
       }
 

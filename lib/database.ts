@@ -2055,6 +2055,76 @@ export class ForumService {
       return false;
     }
   }
+
+  static async getKonuDetay(konuId: number): Promise<any> {
+    try {
+      if (!supabase) {
+        console.error('Supabase bağlantısı yok');
+        return null;
+      }
+
+      const { data: konuData, error } = await supabase
+        .from('forum_konular')
+        .select(`
+          id,
+          baslik,
+          icerik,
+          kategori,
+          yazar_id,
+          yazar_adi,
+          yazar_firma_id,
+          durum,
+          sabitleme,
+          goruntulenme_sayisi,
+          created_at,
+          updated_at
+        `)
+        .eq('id', konuId)
+        .single();
+
+      if (error) {
+        console.error('Konu detayı yükleme hatası:', error);
+        return null;
+      }
+
+      return konuData;
+    } catch (error) {
+      console.error('getKonuDetay hatası:', error);
+      return null;
+    }
+  }
+
+  static async createCevap(cevapData: {
+    KonuID: number;
+    CevapYazanFirmaID: number;
+    CevapMetni: string;
+  }): Promise<boolean> {
+    try {
+      if (!supabase) {
+        console.error('Supabase bağlantısı yok');
+        return false;
+      }
+
+      const { error } = await supabase
+        .from('forum_yorumlar')
+        .insert([{
+          konu_id: cevapData.KonuID,
+          yazar_firma_id: cevapData.CevapYazanFirmaID,
+          icerik: cevapData.CevapMetni,
+          created_at: new Date().toISOString()
+        }]);
+
+      if (error) {
+        console.error('Cevap ekleme hatası:', error);
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error('createCevap hatası:', error);
+      return false;
+    }
+  }
 }
 
 // SUPABASE ONLY: Login senkronizasyon servisi
