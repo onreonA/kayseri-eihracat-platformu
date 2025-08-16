@@ -337,10 +337,25 @@ export default function AdminFirmalarPage() {
       
       if (directClient) {
         try {
+          console.log('🧪 Testing browser-based Supabase connection...');
           const { data: testData, error: testError } = await directClient
             .from('firmalar')
             .select('id, firma_adi')
             .limit(3);
+          
+          if (!testError && testData && testData.length > 0) {
+            console.log('🎉 BROWSER CONNECTION SUCCESS!', testData.length, 'records found');
+            console.log('📄 Live data sample:', testData[0]);
+            
+            // If browser connection works, try to load live data
+            console.log('🔄 Attempting to load live Supabase data...');
+            const liveData = await AdminFirmaService.getAllFirmalar();
+            
+            if (liveData && liveData.length > 0 && liveData[0].firma_adi !== 'Şahbaz İzi San Tic A.Ş.') {
+              console.log('✅ Live Supabase data loaded successfully!');
+              return; // Use live data instead of mock
+            }
+          }
           
           console.log('🧪 Direct client test result:', { 
             success: !testError, 
@@ -349,7 +364,7 @@ export default function AdminFirmalarPage() {
             sampleData: testData?.[0] || null
           });
         } catch (e) {
-          console.log('❌ Direct client test failed:', e);
+          console.log('❌ Direct client test failed:', e.message || e);
         }
       }
 
