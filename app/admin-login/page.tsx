@@ -59,11 +59,9 @@ export default function AdminLoginPage() {
       } catch (apiError) {
         console.log('❌ Backend API hatası:', apiError);
         
-        // Fallback: Basit admin kontrolü
+        // Production fallback: Only master admin (temporary until full Supabase migration)
         const validAdmins = [
-          { email: 'bilgi@omerfarukunsal.com', password: 'admin123', name: 'Ömer Farukunsal' },
-          { email: 'admin@system.com', password: 'admin123', name: 'System Admin' },
-          { email: 'demo@example.com', password: 'demo123', name: 'Demo Admin' }
+          { email: 'bilgi@omerfarukunsal.com', password: 'admin123', name: 'Master Admin' }
         ];
 
         const matchedAdmin = validAdmins.find(admin => 

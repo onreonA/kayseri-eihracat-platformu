@@ -152,6 +152,7 @@ export default function AdminEgitimRaporDashboardPage() {
         `)
         .eq('durum', 'Aktif');
 
+      // TODO: Replace with real training progress calculations
       const mockFirmaIlerlemeleri: FirmaEgitimIlerlemesi[] = (firmalarData || []).map((firma: any, index: number) => {
         const atananSetSayisi = Math.floor(Math.random() * 5) + 1;
         const tamamlananSetSayisi = Math.floor(Math.random() * atananSetSayisi);
@@ -172,6 +173,7 @@ export default function AdminEgitimRaporDashboardPage() {
         };
       });
 
+      // TODO: Replace with real set assignment and completion data
       const mockSetIlerlemeleri: SetIlerlemesi[] = (setlerData || []).map((set: any) => {
         const atananFirmaSayisi = Array.isArray(set.atanan_firmalar) ? set.atanan_firmalar.length : Math.floor(Math.random() * 5) + 1;
         const tamamlananFirmaSayisi = Math.floor(atananFirmaSayisi * (0.4 + Math.random() * 0.6));
@@ -188,6 +190,7 @@ export default function AdminEgitimRaporDashboardPage() {
         };
       });
 
+      // TODO: Replace with real video viewing analytics
       const mockVideoDetaylari: VideoIzlemeDetayi[] = (videolarData || []).slice(0, 10).map((video: any) => ({
         video_id: video.id,
         video_adi: video.video_adi,

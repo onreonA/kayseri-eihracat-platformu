@@ -111,7 +111,8 @@ export class AdminFirmaService {
   }
 
   static getMockFirmalar() {
-    console.log('📄 Mock firma verileri yükleniyor...');
+    console.warn('⚠️ FALLBACK: Mock firma verileri kullanılıyor - Supabase bağlantı sorunu!');
+    console.log('📄 Production\'da bu veriler Supabase\'den gelecek...');
     return [
       {
         id: 1,
