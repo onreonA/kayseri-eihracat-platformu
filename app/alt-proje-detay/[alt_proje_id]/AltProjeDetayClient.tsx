@@ -126,7 +126,7 @@ export default function AltProjeDetayClient({ altProjeId }: AltProjeDetayClientP
 
       return () => subscription.unsubscribe();
     } catch (error) {
-      console.error('Auth hatası:', error?.message, error);
+      console.error('Auth hatası:', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       router.replace('/login');
     }
   };
