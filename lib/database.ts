@@ -1,7 +1,7 @@
 import { getSupabaseClient } from './supabaseClient';
 
-// Get the unified Supabase client
-const supabase = getSupabaseClient();
+// Get the unified Supabase client with safe initialization
+const supabase = typeof window !== 'undefined' ? getSupabaseClient() : null;
 
 // Admin Etkinlik Service
 export class AdminEtkinlikService {
