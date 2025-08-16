@@ -387,21 +387,30 @@ export default function AdminFirmalarPage() {
       await loadFirmalarFromSupabase();
 
       console.log(' Supabase-Only sistemi başarıyla başlatıldı!');
-      // Check if we're using mock data (only in development)
-      const isDevelopment = process.env.NODE_ENV === 'development';
+      // Test real Supabase data loading
       const testFirmalar = await AdminFirmaService.getAllFirmalar();
       
-      if (isDevelopment && testFirmalar.length > 0 && testFirmalar[0].firma_adi === 'Şahbaz İzi San Tic A.Ş.') {
-        setMessage('⚠️ Development mode: Local network kısıtlaması nedeniyle demo veriler kullanılıyor. Production\'da gerçek veriler kullanılacak!');
-        setSystemStatus(prev => ({
-          ...prev,
-          connectionStatus: 'Development Demo Mode'
-        }));
+      if (testFirmalar.length > 0) {
+        if (testFirmalar[0].firma_adi === 'Şahbaz İzi San Tic A.Ş.') {
+          console.warn('⚠️ Mock data fallback aktif - Supabase bağlantı sorunu');
+          setMessage('⚠️ Şu anda demo veriler gösteriliyor. Supabase bağlantısı kontrol ediliyor...');
+          setSystemStatus(prev => ({
+            ...prev,
+            connectionStatus: 'Mock Data Fallback'
+          }));
+        } else {
+          console.log('✅ Live Supabase data aktif');
+          setMessage('✅ Sistem tamamen Supabase\'e geçti! Tüm veriler canlı veritabanından geliyor.');
+          setSystemStatus(prev => ({
+            ...prev,
+            connectionStatus: 'Live Production Data'
+          }));
+        }
       } else {
-        setMessage('✅ Sistem tamamen Supabase\'e geçti! Artık tüm veriler canlı veritabanından geliyor.');
+        setMessage('⚠️ Veri bulunamadı. Supabase tablolarını kontrol edin.');
         setSystemStatus(prev => ({
           ...prev,
-          connectionStatus: 'Live Production Data'
+          connectionStatus: 'No Data Found'
         }));
       }
     } catch (error) {
