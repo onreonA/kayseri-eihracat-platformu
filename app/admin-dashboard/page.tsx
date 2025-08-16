@@ -64,6 +64,11 @@ export default function AdminDashboardPage() {
       href: '/admin-consultant-yonetimi',
     },
     {
+      icon: 'ri-shield-user-line',
+      label: 'Yetki Yönetimi',
+      href: '/admin-permission-yonetimi',
+    },
+    {
       icon: 'ri-calendar-check-line',
       label: 'Randevu Talepleri',
       href: '/admin-randevu-talepleri',
