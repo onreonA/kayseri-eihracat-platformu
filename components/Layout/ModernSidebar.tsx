@@ -46,6 +46,7 @@ export default function ModernSidebar({
     { icon: 'ri-file-text-line', label: 'Destek Merkezi', href: '/destek-merkezi', active: false },
     { icon: 'ri-bar-chart-line', label: 'Dönem Raporları', href: '/donem-raporlari', active: false },
     { icon: 'ri-building-line', label: 'Firma Profil', href: '/firma-profil', active: false },
+    { icon: 'ri-team-line', label: 'Personel Yönetimi', href: '/firma-personel-yonetimi', active: false },
     { icon: 'ri-calendar-line', label: 'Proje Takvimi', href: '/proje-takvimi', active: false },
   ];
 
