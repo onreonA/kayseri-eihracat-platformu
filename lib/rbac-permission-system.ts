@@ -249,7 +249,8 @@ export const SYSTEM_PERMISSIONS = [
 
 export class RBACService {
   private static permissionCache = new Map<string, PermissionCheckResult>();
-  private static cacheTimeout = 5 * 60 * 1000; // 5 minutes
+  private static cacheTimeout = 3 * 60 * 1000; // 3 minutes (reduced for better memory)
+  private static maxCacheSize = 2000; // Limit cache size
   
   /**
    * Check if user has specific permission
@@ -270,9 +271,8 @@ export class RBACService {
 
       const result = await this.checkPermissionDirect(userId, permissionSlug, context);
       
-      // Cache result
-      this.permissionCache.set(cacheKey, result);
-      setTimeout(() => this.permissionCache.delete(cacheKey), this.cacheTimeout);
+      // Cache result with size limit
+      this.setCachedResult(cacheKey, result);
       
       return result;
     } catch (error) {
@@ -642,6 +642,22 @@ export class RBACService {
   }
   
   /**
+   * Set cached result with size management
+   */
+  private static setCachedResult(cacheKey: string, result: PermissionCheckResult): void {
+    // Remove oldest entries if cache is full
+    if (this.permissionCache.size >= this.maxCacheSize) {
+      const oldestKey = this.permissionCache.keys().next().value;
+      if (oldestKey) {
+        this.permissionCache.delete(oldestKey);
+      }
+    }
+    
+    this.permissionCache.set(cacheKey, result);
+    setTimeout(() => this.permissionCache.delete(cacheKey), this.cacheTimeout);
+  }
+  
+  /**
    * Clear permission cache for user
    */
   private static clearUserCache(userId: number): void {
@@ -656,6 +672,17 @@ export class RBACService {
    */
   static clearCache(): void {
     this.permissionCache.clear();
+  }
+  
+  /**
+   * Get cache statistics
+   */
+  static getCacheStats(): { size: number; maxSize: number; hitRate: number } {
+    return {
+      size: this.permissionCache.size,
+      maxSize: this.maxCacheSize,
+      hitRate: 0 // Would need hit/miss tracking for accurate rate
+    };
   }
 }
 

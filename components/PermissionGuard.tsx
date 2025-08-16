@@ -39,13 +39,29 @@ export default function PermissionGuardComponent({
 
   useEffect(() => {
     checkPermissions();
-  }, [permission, permissions, requireAll, context]);
+  }, [permission, permissions, requireAll, JSON.stringify(context)]); // Stabilize context dependency
 
   const checkPermissions = async () => {
     try {
       setLoading(true);
       
       let hasPermission = false;
+
+      // Add caching for component-level permission checks
+      const cacheKey = `component:${permission || permissions?.join(',')}:${JSON.stringify(context)}`;
+      const cachedResult = sessionStorage.getItem(cacheKey);
+      
+      if (cachedResult) {
+        const { result, timestamp } = JSON.parse(cachedResult);
+        const cacheAge = Date.now() - timestamp;
+        
+        // Use cached result if less than 1 minute old
+        if (cacheAge < 60000) {
+          setHasAccess(result);
+          setLoading(false);
+          return;
+        }
+      }
 
       if (permissions && permissions.length > 0) {
         // Multiple permissions check
@@ -58,6 +74,12 @@ export default function PermissionGuardComponent({
         // Single permission check
         hasPermission = await PermissionGuard.canAccess(permission, context);
       }
+
+      // Cache the result
+      sessionStorage.setItem(cacheKey, JSON.stringify({
+        result: hasPermission,
+        timestamp: Date.now()
+      }));
 
       setHasAccess(hasPermission);
     } catch (error) {
