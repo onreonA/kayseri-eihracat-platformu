@@ -210,7 +210,7 @@ export default function AltProjelerClient({ anaProjeId }: AltProjelerClientProps
 
       // Alt projelere görev istatistiklerini ekle
       const altProjelerWithStats = await Promise.all(
-        altProjelerData.map(async (altProje) => {
+        altProjelerData.map(async (altProje: any) => {
           try {
             const { data: gorevlerData } = await supabase
               .from('gorevler')
