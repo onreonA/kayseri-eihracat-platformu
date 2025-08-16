@@ -387,16 +387,22 @@ export default function AdminFirmalarPage() {
       await loadFirmalarFromSupabase();
 
       console.log(' Supabase-Only sistemi başarıyla başlatıldı!');
-      // Check if we're using mock data
+      // Check if we're using mock data (only in development)
+      const isDevelopment = process.env.NODE_ENV === 'development';
       const testFirmalar = await AdminFirmaService.getAllFirmalar();
-      if (testFirmalar.length > 0 && testFirmalar[0].firma_adi === 'Şahbaz İzi San Tic A.Ş.') {
-        setMessage('⚠️ Network kısıtlaması nedeniyle demo veriler kullanılıyor. Sistem çalışır durumda!');
+      
+      if (isDevelopment && testFirmalar.length > 0 && testFirmalar[0].firma_adi === 'Şahbaz İzi San Tic A.Ş.') {
+        setMessage('⚠️ Development mode: Local network kısıtlaması nedeniyle demo veriler kullanılıyor. Production\'da gerçek veriler kullanılacak!');
         setSystemStatus(prev => ({
           ...prev,
-          connectionStatus: 'Demo Mode'
+          connectionStatus: 'Development Demo Mode'
         }));
       } else {
         setMessage('✅ Sistem tamamen Supabase\'e geçti! Artık tüm veriler canlı veritabanından geliyor.');
+        setSystemStatus(prev => ({
+          ...prev,
+          connectionStatus: 'Live Production Data'
+        }));
       }
     } catch (error) {
       console.error(' Sistem başlatma hatası:', error);

@@ -72,8 +72,13 @@ export class AdminFirmaService {
   static async getAllFirmalar() {
     try {
       if (!supabase) {
-        console.warn('⚠️ Supabase bağlantısı yok, mock data kullanılıyor');
-        return this.getMockFirmalar();
+        console.error('Supabase bağlantısı yok');
+        // Only use mock data in development
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('⚠️ Development mode: mock data kullanılıyor');
+          return this.getMockFirmalar();
+        }
+        throw new Error('Supabase connection required in production');
       }
 
       console.log('🔍 Firmalar yükleniyor...');
@@ -84,16 +89,24 @@ export class AdminFirmaService {
 
       if (error) {
         console.error('Supabase firmalar query error:', error);
-        console.warn('⚠️ Supabase hatası, mock data kullanılıyor');
-        return this.getMockFirmalar();
+        // Only fallback to mock data in development
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('⚠️ Development mode: Supabase hatası, mock data kullanılıyor');
+          return this.getMockFirmalar();
+        }
+        throw error; // In production, throw the error
       }
       
       console.log('✅ Firmalar yüklendi:', data?.length || 0, 'kayıt');
       return data || [];
     } catch (error) {
       console.error('Firmalar yüklenirken hata:', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
-      console.warn('⚠️ Bağlantı hatası, mock data kullanılıyor');
-      return this.getMockFirmalar();
+      // Only fallback to mock data in development
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('⚠️ Development mode: Bağlantı hatası, mock data kullanılıyor');
+        return this.getMockFirmalar();
+      }
+      throw error; // In production, let the error bubble up
     }
   }
 
