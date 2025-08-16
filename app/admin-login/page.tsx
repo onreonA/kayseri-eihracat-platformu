@@ -78,6 +78,7 @@ export default function AdminLoginPage() {
           localStorage.setItem('adminRole', 'admin');
           localStorage.setItem('adminId', '1');
           localStorage.setItem('adminName', matchedAdmin.name);
+          localStorage.setItem('admin_token', 'fallback_token_' + Date.now());
 
           console.log('✅ Admin bilgileri kaydedildi, yönlendiriliyor...');
           router.push('/admin-dashboard');
@@ -124,6 +125,7 @@ export default function AdminLoginPage() {
                 localStorage.setItem('adminRole', userData.rol);
                 localStorage.setItem('adminId', userData.id.toString());
                 localStorage.setItem('adminName', userData.ad_soyad || 'Admin');
+                localStorage.setItem('admin_token', 'supabase_token_' + Date.now());
 
                 console.log('✅ Supabase admin girişi başarılı, yönlendiriliyor...');
                 router.push('/admin-dashboard');
