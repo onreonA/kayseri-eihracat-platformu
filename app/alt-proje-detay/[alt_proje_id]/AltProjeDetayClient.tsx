@@ -208,7 +208,7 @@ export default function AltProjeDetayClient({ altProjeId }: AltProjeDetayClientP
       }
 
     } catch (error) {
-      console.error('AltProjeDetay load error ->', error?.message, error);
+      console.error('AltProjeDetay load error ->', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       setGorevler([]);
       if (!altProje) {
         setAltProje(null);
