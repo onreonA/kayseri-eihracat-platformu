@@ -196,28 +196,7 @@ export default function AdminLoginPage() {
               </p>
             </div>
 
-            {/* Admin Hesapları Info */}
-            <div className="mb-6 p-4 bg-blue-900/30 border border-blue-500/50 rounded-lg">
-              <div className="text-center">
-                <p className="text-blue-300 text-sm font-medium mb-3">
-                  🔑 Geçerli Admin Hesapları:
-                </p>
-                <div className="space-y-2 text-xs text-blue-200">
-                  <div className="bg-blue-800/50 p-2 rounded">
-                    <p><strong>Email:</strong> bilgi@omerfarukunsal.com</p>
-                    <p><strong>Şifre:</strong> admin123</p>
-                  </div>
-                  <div className="bg-blue-800/50 p-2 rounded">
-                    <p><strong>Email:</strong> admin@system.com</p>
-                    <p><strong>Şifre:</strong> admin123</p>
-                  </div>
-                  <div className="bg-blue-800/50 p-2 rounded">
-                    <p><strong>Email:</strong> demo@example.com</p>
-                    <p><strong>Şifre:</strong> demo123</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+
 
             {/* Hata Mesajı */}
             {error && (
@@ -229,19 +208,7 @@ export default function AdminLoginPage() {
               </div>
             )}
 
-            {/* Debug Bilgisi */}
-            <div className="mb-6 p-3 bg-green-900/30 border border-green-500/50 rounded-lg">
-              <div className="text-center">
-                <p className="text-green-300 text-xs font-medium mb-2">
-                  🔧 Debug Modu Aktif
-                </p>
-                <div className="text-xs text-green-200">
-                  <p>Girilen Email: {email || 'Henüz girilmedi'}</p>
-                  <p>Şifre Uzunluğu: {password.length} karakter</p>
-                  <p>Loading: {loading ? 'Evet' : 'Hayır'}</p>
-                </div>
-              </div>
-            </div>
+
 
             <form onSubmit={handleLogin} className="space-y-6">
               <div>
@@ -295,10 +262,7 @@ export default function AdminLoginPage() {
 
             <div className="mt-8 text-center">
               <p className="text-sm text-gray-400">
-                🔧 Bu panel sadece yönetici yetkisi olan hesaplar için çalışır.
-              </p>
-              <p className="text-xs text-gray-500 mt-2">
-                Sorun yaşıyorsanız tarayıcı konsolunu (F12) açıp hataları kontrol edin.
+                Bu panel sadece yönetici yetkisi olan hesaplar için çalışır.
               </p>
             </div>
           </div>
