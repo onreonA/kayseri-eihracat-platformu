@@ -142,6 +142,30 @@ export class AdminFirmaService {
       return null;
     }
   }
+
+  static async deleteFirma(id: number): Promise<boolean> {
+    try {
+      if (!supabase) {
+        console.error('Supabase bağlantısı yok');
+        return false;
+      }
+
+      const { error } = await supabase
+        .from('firmalar')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        console.error('Firma silinirken hata:', error);
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Firma silme sistem hatası:', error);
+      return false;
+    }
+  }
 }
 
 // Forum konuları arayüz tanımı
