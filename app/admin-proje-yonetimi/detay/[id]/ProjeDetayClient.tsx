@@ -1129,7 +1129,7 @@ function FirmaListesi({ firmaIds }: { firmaIds: number[] }) {
           return;
         }
 
-        const names = firmalar.map((f) => f.firma_adi).join(', ');
+        const names = firmalar.map((f: any) => f.firma_adi).join(', ');
         setFirmaNames(names || `${firmaIds.length} firma`);
       } catch (error) {
         setFirmaNames(`${firmaIds.length} firma atanmış`);
