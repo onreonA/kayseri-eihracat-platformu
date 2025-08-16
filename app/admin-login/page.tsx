@@ -26,6 +26,9 @@ export default function AdminLoginPage() {
       }
 
       console.log('🔍 Admin girişi deneniyor:', { email: email.toLowerCase() });
+      
+      // Immediate debug check
+      console.log('📊 Form data:', { email, password: password ? '***' : 'empty' });
 
       const cleanEmail = email.toLowerCase().trim();
       
