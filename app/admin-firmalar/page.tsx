@@ -372,7 +372,17 @@ export default function AdminFirmalarPage() {
       await loadFirmalarFromSupabase();
 
       console.log(' Supabase-Only sistemi başarıyla başlatıldı!');
-      setMessage(' Sistem tamamen Supabase\'e geçti! Artık tüm veriler canlı veritabanından geliyor.');
+      // Check if we're using mock data
+      const testFirmalar = await AdminFirmaService.getAllFirmalar();
+      if (testFirmalar.length > 0 && testFirmalar[0].firma_adi === 'Şahbaz İzi San Tic A.Ş.') {
+        setMessage('⚠️ Network kısıtlaması nedeniyle demo veriler kullanılıyor. Sistem çalışır durumda!');
+        setSystemStatus(prev => ({
+          ...prev,
+          connectionStatus: 'Demo Mode'
+        }));
+      } else {
+        setMessage('✅ Sistem tamamen Supabase\'e geçti! Artık tüm veriler canlı veritabanından geliyor.');
+      }
     } catch (error) {
       console.error(' Sistem başlatma hatası:', error);
       setMessage(' Sistem başlatılırken hata oluştu.');
