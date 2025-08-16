@@ -200,7 +200,7 @@ export default function AdminHaberlerPage() {
 
       if (error) throw error;
 
-      const haberlerWithStats = data?.map(haber => ({ ...haber, okunma_sayisi: haber.haber_istatistikleri?.[0]?.toplam_okuma || 0 })) || [];
+      const haberlerWithStats = data?.map((haber: any) => ({ ...haber, okunma_sayisi: haber.haber_istatistikleri?.[0]?.toplam_okuma || 0 })) || [];
 
       setHaberler(haberlerWithStats);
     } catch (error) {
