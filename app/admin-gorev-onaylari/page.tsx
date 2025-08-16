@@ -88,7 +88,7 @@ class SupabaseGorevOnaylariService {
 
       // Güvenli bir şekilde her talebi işle
       const zenginlestirilmisTalepler = await Promise.all(
-        taleplerData.map(async (talep) => {
+        taleplerData.map(async (talep: any) => {
           try {
             // Görev bilgilerini al - hata yönetimi ile
             let gorevData = null;
