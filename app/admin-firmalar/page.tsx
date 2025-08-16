@@ -164,11 +164,15 @@ class SupabaseOnlyDataManager {
   // 获取所有公司 - 仅使用 SUPABASE
   static async getAllFirmalar(): Promise<Firma[]> {
     try {
-      console.log(' Supabase\'dan firma verileri yükleniyor...');
+      console.log('🔍 Supabase\'dan firma verileri yükleniyor...');
 
       const supabaseFirmalar = await AdminFirmaService.getAllFirmalar();
 
-      console.log(` Supabase\'dan ${supabaseFirmalar?.length || 0} firma yüklendi`);
+      console.log(`📊 Supabase'dan ${supabaseFirmalar?.length || 0} firma yüklendi`);
+      
+      if (supabaseFirmalar && supabaseFirmalar.length > 0) {
+        console.log('📄 İlk firma örneği:', supabaseFirmalar[0]);
+      }
 
       // Convert Supabase data to frontend format
       const convertedFirmalar: Firma[] = (supabaseFirmalar || []).map((firma: any) => ({
@@ -185,6 +189,10 @@ class SupabaseOnlyDataManager {
         yetkiliAdi: firma.yetkili_adi || '',
       }));
 
+      console.log(`✅ Converted firmalar: ${convertedFirmalar?.length || 0} kayıt`);
+      if (convertedFirmalar && convertedFirmalar.length > 0) {
+        console.log('📄 İlk converted firma:', convertedFirmalar[0]);
+      }
       return convertedFirmalar;
     } catch (error) {
       console.error(' Supabase firma veri yükleme hatası:', error);

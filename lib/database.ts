@@ -68,15 +68,26 @@ export class AdminEtkinlikService {
 export class AdminFirmaService {
   static async getAllFirmalar() {
     try {
+      if (!supabase) {
+        console.error('Supabase bağlantısı yok');
+        return [];
+      }
+
+      console.log('🔍 Firmalar yükleniyor...');
       const { data, error } = await supabase
         .from('firmalar')
         .select('*')
-        .order('firma_adi', { ascending: true });
+        .order('id', { ascending: true });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase firmalar query error:', error);
+        throw error;
+      }
+      
+      console.log('✅ Firmalar yüklendi:', data?.length || 0, 'kayıt');
       return data || [];
     } catch (error) {
-      console.error('Firmalar yüklenirken hata:', error);
+      console.error('Firmalar yüklenirken hata:', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
       return [];
     }
   }
