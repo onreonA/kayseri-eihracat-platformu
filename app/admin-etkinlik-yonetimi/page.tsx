@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { getSupabaseClient } from '@/lib/supabaseClient';
 import { AdminEtkinlikService, AdminFirmaService } from '../../lib/database';
+import ModernLayout from '../../components/Layout/ModernLayout';
 
 interface Etkinlik {
   id: number;
@@ -35,75 +35,12 @@ interface Firma {
   durum: 'Aktif' | 'Pasif';
 }
 
-const AdminSidebar = ({ sidebarOpen, setSidebarOpen, adminEmail }: {
-  sidebarOpen: boolean;
-  setSidebarOpen: (open: boolean) => void;
-  adminEmail: string;
-}) => {
-  const menuItems = [
-    { icon: 'ri-dashboard-line', label: 'Dashboard', href: '/admin-dashboard' },
-    { icon: 'ri-building-line', label: 'Firma Yönetimi', href: '/admin-firmalar' },
-    { icon: 'ri-project-line', label: 'Proje Yönetimi', href: '/admin-proje-yonetimi' },
-    { icon: 'ri-calendar-check-line', label: 'Randevu Talepleri', href: '/admin-randevu-talepleri' },
-    { icon: 'ri-graduation-cap-line', label: 'Eğitim Yönetimi', href: '/admin-egitim-yonetimi' },
-    { icon: 'ri-calendar-event-line', label: 'Etkinlik Yönetimi', href: '/admin-etkinlik-yonetimi', active: true },
-    { icon: 'ri-bar-chart-line', label: 'Dönem Yönetimi', href: '/admin-donem-yonetimi' },
-    { icon: 'ri-discuss-line', label: 'Forum Yönetimi', href: '/admin-forum-yonetimi' },
-    { icon: 'ri-feedback-line', label: 'Platform Geri Bildirimleri', href: '/admin-geri-bildirimler' },
-    { icon: 'ri-file-text-line', label: 'Destek Dokümanları', href: '/admin-destek-dokumanlari' },
-    { icon: 'ri-team-line', label: 'Kullanıcılar (Personel)', href: '/admin-kullanici-yonetimi' },
-    { icon: 'ri-check-double-line', label: 'Görev Onayları', href: '/admin-gorev-onaylari' }
-  ];
-
-  return (
-    <div className={`${sidebarOpen ? 'w-64' : 'w-16'} transition-all duration-300 bg-white shadow-lg h-screen sticky top-0`}>
-      <div className="p-4">
-        <div className="flex items-center justify-between mb-6">
-          <Link href="/admin-dashboard" className="flex items-center space-x-3 cursor-pointer">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <i className="ri-shield-star-line text-white text-xl"></i>
-            </div>
-            {sidebarOpen && (
-              <div>
-                <h1 className="text-xl font-bold text-gray-800 font-['Pacifico']">logo</h1>
-                <p className="text-xs text-gray-500">Admin Panel</p>
-              </div>
-            )}
-          </Link>
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors cursor-pointer"
-          >
-            <i className={`${sidebarOpen ? 'ri-menu-fold-line' : 'ri-menu-unfold-line'} text-gray-600`}></i>
-          </button>
-        </div>
-
-        {sidebarOpen && <h2 className="text-lg font-semibold text-gray-800 mb-4">Yönetim Menüsü</h2>}
-        <nav className="space-y-2">
-          {menuItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors cursor-pointer ${
-                item.active ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              <div className="w-5 h-5 flex items-center justify-center">
-                <i className={`${item.icon} text-lg`}></i>
-              </div>
-              {sidebarOpen && <span className="text-sm font-medium">{item.label}</span>}
-            </Link>
-          ))}
-        </nav>
-      </div>
-    </div>
-  );
-};
+// AdminSidebar replaced with ModernLayout + ModernSidebar for consistency
 
 export default function AdminEtkinlikYonetimiPage() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [adminEmail, setAdminEmail] = useState('');
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // sidebarOpen state removed - now handled by ModernLayout
   const [currentTime, setCurrentTime] = useState(new Date());
   const [etkinlikler, setEtkinlikler] = useState<Etkinlik[]>([]);
   const [firmalar, setFirmalar] = useState<Firma[]>([]);
@@ -263,11 +200,9 @@ export default function AdminEtkinlikYonetimiPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      <AdminSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} adminEmail={adminEmail} />
-
-      <div className={`${sidebarOpen ? 'ml-64' : 'ml-16'} transition-all duration-300 flex-1 flex flex-col`}>
-        <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+    <ModernLayout userEmail={adminEmail} userRole="admin" isAdmin={true}>
+      <div className="space-y-6">
+        <header className="bg-white rounded-lg shadow-sm border border-gray-200 px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Etkinlik Yönetimi</h1>
@@ -688,6 +623,7 @@ export default function AdminEtkinlikYonetimiPage() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </ModernLayout>
   );
 }
