@@ -1,4 +1,7 @@
-import { supabase } from './supabase-services';
+import { getSupabaseClient } from './supabaseClient';
+
+// Get the unified Supabase client
+const supabase = getSupabaseClient();
 
 // Admin Etkinlik Service
 export class AdminEtkinlikService {

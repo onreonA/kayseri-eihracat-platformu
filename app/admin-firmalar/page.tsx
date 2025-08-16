@@ -329,7 +329,29 @@ export default function AdminFirmalarPage() {
   const initializeSupabaseOnlySystem = async () => {
     try {
       setLoading(true);
-      console.log(' Supabase-Only sistemi başlatılıyor...');
+      console.log('🚀 Supabase-Only sistemi başlatılıyor...');
+      
+      // Direct client test
+      const directClient = getSupabaseClient();
+      console.log('🔍 Direct client test:', !!directClient);
+      
+      if (directClient) {
+        try {
+          const { data: testData, error: testError } = await directClient
+            .from('firmalar')
+            .select('id, firma_adi')
+            .limit(3);
+          
+          console.log('🧪 Direct client test result:', { 
+            success: !testError, 
+            recordCount: testData?.length || 0,
+            error: testError?.message || null,
+            sampleData: testData?.[0] || null
+          });
+        } catch (e) {
+          console.log('❌ Direct client test failed:', e);
+        }
+      }
 
       // 1. localStorage test verilerini temizle
       console.log(' localStorage test verileri temizleniyor...');
