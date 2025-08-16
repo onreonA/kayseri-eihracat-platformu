@@ -300,35 +300,17 @@ export default function AdminFirmalarPage() {
     return () => clearInterval(timer);
   }, [router]);
 
-  const checkAdminAuth = async () => {
+  const handleAuthCheck = async () => {
     try {
-      // Önce localStorage kontrolü yap
-      const isAdminLoggedIn = localStorage.getItem('isAdminLoggedIn');
-      const adminToken = localStorage.getItem('admin_token');
+      const authResult = await checkAdminAuth();
       
-      console.log('🔍 Admin kontrolü (Firma Yönetimi):', { isAdminLoggedIn, adminToken });
+      if (!authResult.isAuthenticated) {
+        console.log('❌ Admin authentication failed, redirecting to login...');
+        router.replace(authResult.redirect || '/admin-login');
+        return;
+      }
       
-      if (isAdminLoggedIn === 'true' && adminToken) {
-        console.log('✅ Admin girişi doğrulandı (Firma Yönetimi), sistem başlatılıyor...');
-        initializeSupabaseOnlySystem();
-        return;
-      }
-
-      // Fallback: Supabase kontrolü
-      const supabase = getSupabaseClient();
-      if (!supabase) {
-        console.log('❌ Supabase bağlantısı yok, login\'e yönlendiriliyor...');
-        router.replace('/admin-login');
-        return;
-      }
-
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        console.log('❌ Supabase session yok, login\'e yönlendiriliyor...');
-        router.replace('/admin-login');
-        return;
-      }
-
+      console.log('✅ Admin authenticated, initializing system...');
       initializeSupabaseOnlySystem();
     } catch (error) {
       console.error('[AdminFirmalar]', error instanceof Error ? error.message : 'Bilinmeyen hata', error);
