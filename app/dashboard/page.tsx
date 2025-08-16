@@ -388,7 +388,7 @@ export default function DashboardPage() {
               .select('id, durum')
               .contains('atanan_firmalar', [firma.id]);
 
-            const tamamlananGorevler = gorevlerData?.filter((gorev) => gorev.durum === 'Tamamlandı' || gorev.durum === 'Tamamlandi') || [];
+            const tamamlananGorevler = gorevlerData?.filter((gorev: any) => gorev.durum === 'Tamamlandı' || gorev.durum === 'Tamamlandi') || [];
 
             const projeSayisi = projelerData?.length || 0;
             const toplamGorevSayisi = gorevlerData?.length || 0;
