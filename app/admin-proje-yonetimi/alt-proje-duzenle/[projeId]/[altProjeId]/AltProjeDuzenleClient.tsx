@@ -222,7 +222,7 @@ export default function AltProjeDuzenleClient({ projeId, altProjeId }: AltProjeD
 
     } catch (error: any) {
       console.error('❌ Veri yükleme hatası:', error);
-      setError(`Veriler yüklenirken hata oluştu: ${error?.message || 'Bilinmeyen hata'}`);
+      setError(`Veriler yüklenirken hata oluştu: ${error instanceof Error ? error.message : 'Bilinmeyen hata'}`);
     } finally {
       setLoading(false);
     }

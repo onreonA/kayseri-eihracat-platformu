@@ -2380,7 +2380,7 @@ export class AdminRandevuService {
       }
 
       // 格式化数据
-      const formattedData = data.map(item => ({
+      const formattedData = data.map((item: any) => ({
         id: item.id,
         ID: item.id,
         firmaId: item.firma_id,
@@ -2446,7 +2446,7 @@ export class AdminRandevuService {
         return [];
       }
 
-      const formattedData = (data || []).map(item => ({
+      const formattedData = (data || []).map((item: any) => ({
         id: item.id,
         ID: item.id,
         adSoyad: item.ad_soyad || 'Bilinmeyen',
@@ -2718,7 +2718,7 @@ export class DestekDokümanlarıService {
       if (error) throw error;
       
       // Supabase'deki sütun isimlerini frontend'e uygun hale getir
-      const formattedData = (data || []).map(doc => ({
+      const formattedData = (data || []).map((doc: any) => ({
         ID: doc.id,
         BelgeAdı: doc.baslik || doc.belge_adi || 'Başlık Yok',
         BelgeURL: doc.belge_url || '',
@@ -2982,7 +2982,7 @@ export class SupabaseEgitimService {
 
       // Yeni atamaları ekle
       if (firmaIds.length > 0) {
-        const atamalar = firmaIds.map(firmaId => ({
+        const atamalar = firmaIds.map((firmaId: number) => ({
           egitim_set_id: setId,
           firma_id: firmaId,
           created_at: new Date().toISOString()

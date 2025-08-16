@@ -193,7 +193,7 @@ export default function AltProjeGorevEkleClient({ projeId, altProjeId }: AltProj
         console.warn('Görev yükleme hatası:', gorevError);
         setMevcutGorevler([]);
       } else {
-        const gorevlerFormatted = (gorevData || []).map(gorev => ({
+        const gorevlerFormatted = (gorevData || []).map((gorev: any) => ({
           ID: gorev.id,
           GorevBasligi: gorev.gorev_adi,
           Aciklama: gorev.aciklama,
@@ -360,7 +360,7 @@ export default function AltProjeGorevEkleClient({ projeId, altProjeId }: AltProj
       console.error('Görev oluşturma hatası:', error);
 
       let errorMessage = '❌ Görev oluşturulurken bir hata oluştu.';
-      if (error?.message) {
+      if (error instanceof Error && error.message) {
         if (error.message.includes('duplicate') || error.message.includes('already exists')) {
           errorMessage = `❌ "${formData.gorevAdi}" adlı görev zaten mevcut!`;
         } else if (error.message.includes('foreign key')) {

@@ -469,8 +469,8 @@ export default function ProjeDetayClient({ projeId }: { projeId: string }) {
       console.log('🎉 Tüm proje verileri başarıyla yüklendi');
       setLoading(false);
     } catch (error: any) {
-      console.error('💥 Proje detay yükleme kritik hatası:', error?.message || 'Bilinmeyen hata');
-      setMessage(`Sistem hatası: ${error?.message || 'Proje detay verileri yüklenirken beklenmeyen hata oluştu'}`);
+      console.error('💥 Proje detay yükleme kritik hatası:', error instanceof Error ? error.message : 'Bilinmeyen hata');
+      setMessage(`Sistem hatası: ${error instanceof Error ? error.message : 'Proje detay verileri yüklenirken beklenmeyen hata oluştu'}`);
       setLoading(false);
     }
   };

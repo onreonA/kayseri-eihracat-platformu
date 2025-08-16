@@ -237,7 +237,7 @@ export default function AdminEgitimVideoListesiPage() {
     });
   };
 
-  const uniqueSets = [...new Set(videolar.map(v => ({ id: v.egitim_set_id, name: v.set_adi })))];
+  const uniqueSets = [...new Set(videolar.map((v: any) => ({ id: v.egitim_set_id, name: v.set_adi })))];
 
   if (loading) {
     return (

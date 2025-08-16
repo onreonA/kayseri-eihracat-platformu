@@ -915,7 +915,7 @@ export default function FirmaProfilPage() {
                       >
                         {tabSaving.genel ? (
                           <>
-                            <LoadingSpinner size="small" />
+                            <LoadingSpinner size="sm" />
                             <span>Kaydediliyor...</span>
                           </>
                         ) : (
@@ -959,7 +959,7 @@ export default function FirmaProfilPage() {
                       >
                         {tabSaving.ticari ? (
                           <>
-                            <LoadingSpinner size="small" />
+                            <LoadingSpinner size="sm" />
                             <span>Kaydediliyor...</span>
                           </>
                         ) : (
@@ -1003,7 +1003,7 @@ export default function FirmaProfilPage() {
                       >
                         {tabSaving.ihracat ? (
                           <>
-                            <LoadingSpinner size="small" />
+                            <LoadingSpinner size="sm" />
                             <span>Kaydediliyor...</span>
                           </>
                         ) : (
@@ -1047,7 +1047,7 @@ export default function FirmaProfilPage() {
                       >
                         {tabSaving.urun ? (
                           <>
-                            <LoadingSpinner size="small" />
+                            <LoadingSpinner size="sm" />
                             <span>Kaydediliyor...</span>
                           </>
                         ) : (
@@ -1091,7 +1091,7 @@ export default function FirmaProfilPage() {
                       >
                         {tabSaving.dijital ? (
                           <>
-                            <LoadingSpinner size="small" />
+                            <LoadingSpinner size="sm" />
                             <span>Kaydediliyor...</span>
                           </>
                         ) : (
@@ -1161,7 +1161,7 @@ export default function FirmaProfilPage() {
                     >
                       {tabSaving.belgeler ? (
                         <>
-                          <LoadingSpinner size="small" />
+                          <LoadingSpinner size="sm" />
                           <span>Kaydediliyor...</span>
                         </>
                       ) : (
@@ -1191,7 +1191,7 @@ export default function FirmaProfilPage() {
                 >
                   {saving ? (
                     <>
-                      <LoadingSpinner size="small" />
+                      <LoadingSpinner size="sm" />
                       <span>Profil Kaydediliyor...</span>
                     </>
                   ) : (

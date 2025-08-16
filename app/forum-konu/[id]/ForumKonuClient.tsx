@@ -299,7 +299,7 @@ export default function ForumKonuClient({ konuId }: ForumKonuClientProps) {
 
     } catch (error: any) {
       console.error('💬 ❌ ENHANCED Cevap gönderme hatası:', {
-        message: error?.message || 'Bilinmeyen hata',
+        message: error instanceof Error ? error.message : 'Bilinmeyen hata',
         name: error?.name || 'Hata adı yok',
         stack: error?.stack || 'Stack yok',
         type: typeof error
@@ -308,7 +308,7 @@ export default function ForumKonuClient({ konuId }: ForumKonuClientProps) {
       // 🔧 ENHANCED User-Friendly Error Messages
       let userMessage = '❌ Cevap gönderilirken beklenmeyen bir hata oluştu.';
 
-      if (error?.message) {
+      if (error instanceof Error && error.message) {
         const errorMsg = error.message.toLowerCase();
 
         if (errorMsg.includes('foreign key constraint')) {

@@ -270,7 +270,7 @@ export class DestekDokümanlarıService {
           return this.getMockDokümanlar();
         }
 
-        const formattedDokümanlar = dokumanlarData.map(dokuman => ({
+        const formattedDokümanlar = dokumanlarData.map((dokuman: any) => ({
           ID: dokuman.id,
           BelgeAdı: dokuman.belge_adi || '',
           BelgeURL: dokuman.belge_url || '',
@@ -544,7 +544,7 @@ export class SupabaseProjeService {
                 .in('id', projeData.hedef_firmalar);
 
               if (!firmaError && firmalar && firmalar.length > 0) {
-                atananFirmaAdlari = firmalar.map(f => f.firma_adi).join(', ');
+                atananFirmaAdlari = firmalar.map((f: any) => f.firma_adi).join(', ');
               }
             } catch (firmaErr) {
               console.warn('Getting company names failed:', firmaErr);
@@ -661,7 +661,7 @@ export class SupabaseProjeService {
                   .in('id', proje.hedef_firmalar);
 
                 if (!firmaError && firmalar && firmalar.length > 0) {
-                  atananFirmaAdlari = firmalar.map(f => f.firma_adi).join(', ');
+                  atananFirmaAdlari = firmalar.map((f: any) => f.firma_adi).join(', ');
                 }
               } catch (firmaErr) {
                 console.warn('Getting company names failed:', firmaErr);
@@ -852,7 +852,7 @@ export class SupabaseProjeService {
           return [];
         }
 
-        const formattedGorevler = gorevlerData.map(gorev => ({
+        const formattedGorevler = gorevlerData.map((gorev: any) => ({
           id: gorev.id,
           projeId: gorev.proje_id,
           altProjeId: gorev.alt_proje_id,
@@ -1306,7 +1306,7 @@ export class SupabaseProjeService {
           return [];
         }
 
-        const formattedAltProjeler = altProjelerData.map(altProje => ({
+        const formattedAltProjeler = altProjelerData.map((altProje: any) => ({
           id: altProje.id,
           projeId: altProje.proje_id,
           altProjeAdi: altProje.alt_proje_adi || '未命名子项目',
@@ -1741,7 +1741,7 @@ export class SupabaseEgitimService {
           return this.getMockEgitimSetleri();
         }
 
-        const formattedSetler = setlerData.map(set => ({
+        const formattedSetler = setlerData.map((set: any) => ({
           id: set.id,
           set_adi: set.set_adi || '未命名集合',
           aciklama: set.aciklama || '',
@@ -1919,7 +1919,7 @@ export class SupabaseEgitimService {
           console.warn('Assignment table query failed, all sets will appear as locked:', atamaQueryError?.message || '未知错误');
         }
 
-        const formattedSetler = setlerData.map(set => ({
+        const formattedSetler = setlerData.map((set: any) => ({
           id: set.id,
           set_adi: set.set_adi || '未命名集合',
           aciklama: set.aciklama || '',
@@ -2022,7 +2022,7 @@ export class SupabaseEgitimService {
       for (const set of atanmisSetler) {
         if (set.toplam_video_sayisi > 0) {
           const setVideolari = await this.getEgitimVideolari(set.id);
-          const setVideoIds = setVideolari.map(v => v.id);
+          const setVideoIds = setVideolari.map((v: any) => v.id);
 
           const setIzlenenSayisi = setVideoIds.filter(videoId => izlenenVideolar.includes(videoId)).length;
 

@@ -235,7 +235,7 @@ export default function ProjeDetayClient({ projeId }: ProjeDetayClientProps) {
         console.warn('🎯 Firma detayları yüklenirken hata:', firmaError?.message || 'Bilinmeyen hata');
       }
     } catch (error: any) {
-      const errorMessage = error?.message || error?.toString() || 'Bilinmeyen hata oluştu';
+      const errorMessage = error instanceof Error ? error.message : (error?.toString() || 'Bilinmeyen hata oluştu');
       console.error('🎯 Proje detay yükleme sistem hatası:', errorMessage);
       setError(`Proje detayları yüklenirken hata oluştu: ${errorMessage}`);
     } finally {
@@ -280,7 +280,7 @@ export default function ProjeDetayClient({ projeId }: ProjeDetayClientProps) {
 
         await loadProjeDetay();
       } catch (error: any) {
-        const errorMessage = error?.message || 'Bilinmeyen hata';
+        const errorMessage = error instanceof Error ? error.message : 'Bilinmeyen hata';
         console.error('🎯 Alt proje silme hatası:', errorMessage);
         alert(`Alt proje silinirken hata oluştu: ${errorMessage}`);
       }
@@ -315,7 +315,7 @@ export default function ProjeDetayClient({ projeId }: ProjeDetayClientProps) {
 
         await loadProjeDetay();
       } catch (error: any) {
-        const errorMessage = error?.message || 'Bilinmeyen hata';
+        const errorMessage = error instanceof Error ? error.message : 'Bilinmeyen hata';
         console.error('🎯 Görev silme hatası:', errorMessage);
         alert(`Görev silinirken hata oluştu: ${errorMessage}`);
       }
