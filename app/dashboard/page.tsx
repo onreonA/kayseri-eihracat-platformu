@@ -376,7 +376,7 @@ export default function DashboardPage() {
       console.log(` ${firmalarData.length} aktif firma yüklendi`);
 
       const firmaPerformanslar = await Promise.all(
-        firmalarData.map(async (firma, index) => {
+        firmalarData.map(async (firma: any, index: number) => {
           try {
             const { data: projelerData } = await supabase
               .from('projeler')
