@@ -59,6 +59,11 @@ export default function AdminDashboardPage() {
       href: '/admin-proje-yonetimi',
     },
     {
+      icon: 'ri-user-star-line',
+      label: 'Danışman Yönetimi',
+      href: '/admin-consultant-yonetimi',
+    },
+    {
       icon: 'ri-calendar-check-line',
       label: 'Randevu Talepleri',
       href: '/admin-randevu-talepleri',
