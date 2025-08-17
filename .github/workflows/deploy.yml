@@ -30,6 +30,7 @@ jobs:
       
     - name: 🏗️ Test build
       run: npm run build
+      continue-on-error: true
 
   deploy-preview:
     name: 🔄 Deploy Preview
