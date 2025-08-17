@@ -83,4 +83,4 @@ Bu proje özel bir projedir.
 ---
 
 **Geliştirici**: Ömer Faruk Ünsal  
-**İletişim**: bilgi@omerfarukunsal.com
+**İletişim**: bilgi@omerfarukunsal.com🚀 Deployment test - Sun Aug 17 13:19:54 +03 2025
