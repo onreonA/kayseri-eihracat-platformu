@@ -84,3 +84,4 @@ export default function ModernLayout({
     </div>
   );
 }
+export default ModernLayout;

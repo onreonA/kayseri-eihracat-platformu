@@ -7,7 +7,7 @@ interface LoadingSpinnerProps {
   text?: string;
 }
 
-export default function LoadingSpinner({ 
+export function LoadingSpinner({ 
   size = 'md', 
   color = 'blue', 
   text = 'Yükleniyor...' 
@@ -39,3 +39,5 @@ export default function LoadingSpinner({
     </div>
   );
 }
+
+export default LoadingSpinner;

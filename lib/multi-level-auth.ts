@@ -597,5 +597,31 @@ export const useAuth = () => {
   };
 };
 
+// ================================================================
+// UNIFIED LOGIN SERVICE EXPORT
+// ================================================================
+
+export class UnifiedLoginService {
+  static async login(credentials: LoginCredentials): Promise<AuthResult> {
+    return await MultiLevelAuthService.login(credentials);
+  }
+  
+  static logout(): void {
+    return MultiLevelAuthService.logout();
+  }
+  
+  static getCurrentUser(): AuthUser | null {
+    return MultiLevelAuthService.getCurrentUser();
+  }
+  
+  static isAuthenticated(): boolean {
+    return MultiLevelAuthService.isAuthenticated();
+  }
+  
+  static hasRole(role: UserRole): boolean {
+    return MultiLevelAuthService.hasRole(role);
+  }
+}
+
 // Export everything
 export default MultiLevelAuthService;
