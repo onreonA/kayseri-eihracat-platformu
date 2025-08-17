@@ -82,8 +82,9 @@ export default function AdminLoginPage() {
         
         // Production fallback: Only master admin (temporary until full Supabase migration)
         const validAdmins = [
-          { email: 'bilgi@omerfarukunsal.com', password: 'admin123', name: 'Master Admin' }
-        ];
+  { email: 'bilgi@omerfarukunsal.com', password: 'admin123', name: 'Master Admin' },
+  { email: 'admin@ihracatakademi.com', password: 'admin123', name: 'Admin User' }
+];
 
         const matchedAdmin = validAdmins.find(admin => 
           admin.email === cleanEmail && admin.password === password
