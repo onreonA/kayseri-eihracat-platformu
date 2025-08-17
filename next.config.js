@@ -1,4 +1,7 @@
+const path = require('path'); // BUNU EN ÜSTE EKLEYİN
+
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
   compress: true,
@@ -132,25 +135,31 @@ const nextConfig = {
     ];
   },
   
-  // Webpack configuration
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Optimize bundle size
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        chunks: 'all',
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-          },
+// Webpack configuration
+webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  // Path alias configuration for @ symbol
+  config.resolve.alias = {
+    ...config.resolve.alias,
+    '@': path.resolve(__dirname, '.'),
+  };
+  
+  // Optimize bundle size
+  config.optimization = {
+    ...config.optimization,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
         },
       },
-    };
-    
-    return config;
-  },
+    },
+  };
+  
+  return config;
+},
   
   // Enable TypeScript error checking
   typescript: {
