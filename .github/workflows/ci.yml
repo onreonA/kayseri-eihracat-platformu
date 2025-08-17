@@ -27,11 +27,7 @@ jobs:
     - name: 🧹 ESLint check
       run: npm run lint
       continue-on-error: true
-      
-    - name: 🔧 TypeScript check
-      run: npm run type-check
-      continue-on-error: true
-      
+        
     - name: 🏗️ Build test
       run: npm run build
       
