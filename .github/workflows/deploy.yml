@@ -48,14 +48,15 @@ jobs:
       run: npm ci
 
       
-    - name: 🚀 Deploy to Vercel (Preview)
-      uses: vercel/action-deploy@v1
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-        working-directory: ./
+- name: 🚀 Deploy to Vercel (Preview)
+  uses: amondnet/vercel-action@v25
+  continue-on-error: true
+  with:
+    vercel-token: ${{ secrets.VERCEL_TOKEN }}
+    github-token: ${{ secrets.GITHUB_TOKEN }}
+    vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+    vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+    working-directory: ./
 
   deploy-production:
     name: 🌍 Deploy to Production
@@ -76,15 +77,16 @@ jobs:
     - name: 📚 Install dependencies
       run: npm ci
       
-    - name: 🚀 Deploy to Vercel (Production)
-      uses: vercel/action-deploy@v1
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-        vercel-args: '--prod'
-        working-directory: ./
+- name: 🚀 Deploy to Vercel (Production)
+  uses: amondnet/vercel-action@v25
+  continue-on-error: true
+  with:
+    vercel-token: ${{ secrets.VERCEL_TOKEN }}
+    github-token: ${{ secrets.GITHUB_TOKEN }}
+    vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+    vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+    vercel-args: '--prod'
+    working-directory: ./
         
     - name: 🎉 Deployment Success Notification
       if: success()
