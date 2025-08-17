@@ -72,3 +72,4 @@ backend/logs/
 # Temporary files
 *.tmp
 *.temp
+*.log
