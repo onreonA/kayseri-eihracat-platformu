@@ -23,11 +23,6 @@ jobs:
         
     - name: 📚 Install dependencies
       run: npm ci
-      
-# AFTER (comment out):
-# - name: 🧹 ESLint check
-#   run: npm run lint
-#   continue-on-error: true
         
     - name: 🏗️ Build test
       run: npm run build
