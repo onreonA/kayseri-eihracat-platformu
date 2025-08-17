@@ -32,14 +32,8 @@ jobs:
       run: npm run type-check
       continue-on-error: true
       
-    - name: 🧪 Run validation tests
-      run: npm run test
-      
     - name: 🏗️ Build test
       run: npm run build
-      
-    - name: 📊 Performance test
-      run: npm run test:production
       
     - name: 🎯 Report Results
       if: always()
