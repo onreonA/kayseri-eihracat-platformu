@@ -103,14 +103,9 @@ export const isValidPhone = (phone: string): boolean => {
   return phoneRegex.test(phone.replace(/\\s/g, ''));
 };
 
-// URL yardımcı fonksiyonları
 export const getYouTubeVideoId = (url: string): string | null => {
   if (!url) return null;
-  return null; // Geçici olarak basitleştiriyoruz
-};
-  const regex = /(?:youtube\\.com\\/(?:[^\\/]+\\/)+(?:v|e(?:mbed)?)\\/|youtu\\.be\\/)([a-zA-Z0-9_-]{11})/;
-  const match = url.match(regex);
-  return match ? match[1] : null;
+  return null;
 };
 
 export const getYouTubeThumbnail = (videoId: string, quality: 'default' | 'medium' | 'high' | 'maxres' = 'medium'): string => {
